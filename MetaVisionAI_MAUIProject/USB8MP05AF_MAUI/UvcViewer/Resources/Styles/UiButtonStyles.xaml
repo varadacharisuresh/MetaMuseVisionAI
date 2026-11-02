@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="UvcViewer.Styles.UiButtonStyles">
+  <!-- Shared palette; every scanner/checkout/settings button uses one of these styles. -->
+  <Color x:Key="UiBlue">#0081FB</Color>
+  <Color x:Key="UiBlueBorder">#55AEFF</Color>
+  <Color x:Key="UiMuted">#294560</Color>
+  <Color x:Key="UiBorder">#4B6B85</Color>
+  <Color x:Key="UiDanger">#493340</Color>
+
+  <Style x:Key="UiButtonBase" TargetType="Button">
+    <Setter Property="BackgroundColor" Value="{StaticResource UiMuted}" />
+    <Setter Property="BorderColor" Value="{StaticResource UiBorder}" />
+    <Setter Property="BorderWidth" Value="1" />
+    <Setter Property="TextColor" Value="White" />
+    <Setter Property="FontAttributes" Value="Bold" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="CornerRadius" Value="14" />
+    <Setter Property="Padding" Value="10,5" />
+  </Style>
+
+  <Style x:Key="UiHeaderIconButton" TargetType="Button" BasedOn="{StaticResource UiButtonBase}">
+    <Setter Property="WidthRequest" Value="48" />
+    <Setter Property="HeightRequest" Value="48" />
+    <Setter Property="CornerRadius" Value="14" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="BackgroundColor" Value="#263E56" />
+  </Style>
+
+  <!-- Used for buttons where a Border/Path/Image behind the button paints the icon. -->
+  <Style x:Key="UiTransparentIconButton" TargetType="Button" BasedOn="{StaticResource UiButtonBase}">
+    <Setter Property="BackgroundColor" Value="Transparent" />
+    <Setter Property="BorderWidth" Value="0" />
+    <Setter Property="BorderColor" Value="Transparent" />
+    <Setter Property="Padding" Value="0" />
+  </Style>
+
+  <Style x:Key="UiPrimaryIconButton" TargetType="Button" BasedOn="{StaticResource UiButtonBase}">
+    <Setter Property="BackgroundColor" Value="{StaticResource UiBlue}" />
+    <Setter Property="BorderColor" Value="{StaticResource UiBlueBorder}" />
+    <Setter Property="WidthRequest" Value="64" />
+    <Setter Property="HeightRequest" Value="64" />
+    <Setter Property="CornerRadius" Value="32" />
+    <Setter Property="Padding" Value="0" />
+  </Style>
+
+  <Style x:Key="UiQuantityButton" TargetType="Button" BasedOn="{StaticResource UiButtonBase}">
+    <Setter Property="WidthRequest" Value="44" />
+    <Setter Property="HeightRequest" Value="44" />
+    <Setter Property="CornerRadius" Value="14" />
+    <Setter Property="FontSize" Value="21" />
+    <Setter Property="Padding" Value="0" />
+  </Style>
+
+  <Style x:Key="UiCheckoutButton" TargetType="Button" BasedOn="{StaticResource UiButtonBase}">
+    <Setter Property="BackgroundColor" Value="{StaticResource UiBlue}" />
+    <Setter Property="BorderColor" Value="{StaticResource UiBlueBorder}" />
+    <Setter Property="HeightRequest" Value="54" />
+    <Setter Property="FontSize" Value="18" />
+    <Setter Property="CornerRadius" Value="14" />
+  </Style>
+
+  <Style x:Key="UiQuantityEntry" TargetType="Entry">
+    <Setter Property="BackgroundColor" Value="#20384F" />
+    <Setter Property="TextColor" Value="White" />
+    <Setter Property="WidthRequest" Value="48" />
+    <Setter Property="HeightRequest" Value="44" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="HorizontalTextAlignment" Value="Center" />
+  </Style>
+</ResourceDictionary>

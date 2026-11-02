@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:UvcViewer.Views"
+             x:Class="UvcViewer.MainPage"
+             BackgroundColor="#080E18"
+             Loaded="OnScanPageLoaded"
+             Unloaded="OnScanPageUnloaded">
+    <Grid>
+        <Grid x:Name="MainSplitGrid" RowDefinitions="44*,56*" RowSpacing="10" Padding="12">
+            <!-- Keep the existing USB TextureView / camera lifecycle intact. -->
+            <Grid Grid.Row="0">
+                <Border Stroke="#32435D" StrokeThickness="1"
+                        StrokeShape="RoundRectangle 14" BackgroundColor="Black">
+                    <Grid>
+                        <views:UvcPreview x:Name="Preview" />
+                        <Label x:Name="Status" IsVisible="False" />
+                    </Grid>
+                </Border>
+                <Grid HorizontalOptions="End" VerticalOptions="Start"
+                      WidthRequest="48" HeightRequest="48" Margin="8">
+                    <Button Text="" Clicked="OnSettingsClicked" BackgroundColor="#C8203149"
+                            CornerRadius="13" Pressed="OnUiButtonPressed" Released="OnUiButtonReleased"
+                            SemanticProperties.Description="Camera settings" />
+                    <Image Source="icon_settings.png" WidthRequest="25" HeightRequest="25"
+                           InputTransparent="True" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Grid>
+                <Grid HorizontalOptions="Start" VerticalOptions="Start"
+                      WidthRequest="48" HeightRequest="48" Margin="8">
+                    <Button x:Name="ExpandPreviewButton" Text="" Clicked="OnTogglePreviewClicked"
+                            BackgroundColor="#C8203149" CornerRadius="13"
+                            Pressed="OnUiButtonPressed" Released="OnUiButtonReleased"
+                            SemanticProperties.Description="Expand camera preview" />
+                    <Image x:Name="ExpandPreviewGlyph" Source="icon_expand.png"
+                           WidthRequest="25" HeightRequest="25" InputTransparent="True"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Image x:Name="CollapsePreviewGlyph" Source="icon_collapse.png"
+                           WidthRequest="25" HeightRequest="25" IsVisible="False"
+                           InputTransparent="True" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Grid>
+                <!-- Visible Muse branding overlay; does not block USB camera taps. -->
+                <Border HorizontalOptions="Center" VerticalOptions="End" Margin="10"
+                        Stroke="#358FE4" StrokeThickness="1.2" StrokeShape="RoundRectangle 13"
+                        BackgroundColor="#DE122B46" Padding="15,8" InputTransparent="True">
+                    <Grid ColumnDefinitions="30,Auto" ColumnSpacing="8" InputTransparent="True">
+                        <Path Data="M5,12 C8,4 12,4 16,12 C20,20 24,20 27,12 M5,12 C8,20 12,20 16,12 C20,4 24,4 27,12"
+                              Stroke="#78D6FF" StrokeThickness="2.6" StrokeLineCap="Round"
+                              Fill="Transparent" WidthRequest="28" HeightRequest="28"
+                              VerticalOptions="Center" InputTransparent="True" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="1" InputTransparent="True">
+                            <Label Text="META MUSE AI" FontSize="13" FontAttributes="Bold"
+                                   TextColor="#FFFFFF" InputTransparent="True" />
+                            <Label Text="Powered by Muse Spark 1.3" FontSize="10"
+                                   TextColor="#B8DDFF" InputTransparent="True" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- Camera stays unchanged; role was selected BEFORE opening MainPage. -->
+            <Border x:Name="ItemsPanel" Grid.Row="1" Stroke="#32435D" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 15" BackgroundColor="#101E30">
+                <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="8" Padding="16,13,16,14">
+                    <VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="*,Auto,Auto,42" ColumnSpacing="7">
+                            <VerticalStackLayout Spacing="1" VerticalOptions="Center">
+                                <Label x:Name="SelectedRoleLabel" Text="General" FontSize="19"
+                                       FontAttributes="Bold" TextColor="White" LineBreakMode="TailTruncation"/>
+                            </VerticalStackLayout>
+                            <Button Grid.Column="1" Text="Change role" Clicked="OnChangeRoleClicked"
+                                    BackgroundColor="#223A50" TextColor="#DBEDFA" CornerRadius="10"
+                                    FontSize="12" Padding="10,5" VerticalOptions="Center" />
+                            <!-- Main-screen reset: same vector reset icon as Checkout; only Cashier/Pharmacist. -->
+                            <Grid x:Name="MainOrderResetGrid" Grid.Column="2" WidthRequest="40"
+                                  HeightRequest="40" VerticalOptions="Center" IsVisible="False">
+                                <Border BackgroundColor="#20384F" Stroke="#4D769B" StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 12" />
+                                <Path Data="M20,7 L20,12 L15,12 M20,12 A8,8 0 1 0 12,20"
+                                      Stroke="#9CD7FF" StrokeThickness="2.2"
+                                      StrokeLineCap="Round" StrokeLineJoin="Round" Fill="Transparent"
+                                      Aspect="Uniform" WidthRequest="24" HeightRequest="24"
+                                      HorizontalOptions="Center" VerticalOptions="Center"
+                                      InputTransparent="True" />
+                                <Button Text="" BackgroundColor="Transparent" Padding="0"
+                                        Clicked="OnMainOrderResetClicked"
+                                        SemanticProperties.Description="Reset current order" />
+                            </Grid>
+                            <Grid Grid.Column="3" HeightRequest="40" WidthRequest="40" VerticalOptions="Center">
+                                <Border BackgroundColor="#20384F" Stroke="#4D769B"
+                                        StrokeThickness="1" StrokeShape="RoundRectangle 20" />
+                                <Path Data="M12,2 A10,10 0 1 1 12,22 A10,10 0 1 1 12,2"
+                                      Fill="Transparent" Stroke="#D9EFFF" StrokeThickness="1.8"
+                                      WidthRequest="24" HeightRequest="24" Aspect="Uniform"
+                                      HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True" />
+                                <Label Text="i" FontSize="16" FontAttributes="Bold" TextColor="#D9EFFF"
+                                       HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True" />
+                                <Button Text="" BackgroundColor="Transparent" CornerRadius="20"
+                                        Clicked="OnWorkflowInfoClicked"
+                                        SemanticProperties.Description="Instructions for this task" />
+                            </Grid>
+                        </Grid>
+                        <Border BackgroundColor="#20384F" Stroke="#4D769B" StrokeShape="RoundRectangle 12"
+                                Padding="12,3">
+                            <Grid ColumnDefinitions="*,32" HeightRequest="50" Loaded="OnWorkflowPickerLoaded">
+                                <Label x:Name="WorkflowSelectionLabel" Text="Read barcode" TextColor="White"
+                                       FontSize="16" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                                <Path Grid.Column="1" Data="M 3,7 L 12,16 L 21,7" Stroke="#E4F4FF"
+                                      StrokeThickness="3" StrokeLineCap="Round" StrokeLineJoin="Round"
+                                      WidthRequest="24" HeightRequest="24"
+                                      HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True" />
+                                <Button Grid.ColumnSpan="2" Text="" BackgroundColor="Transparent"
+                                        Clicked="OnTaskSelectorClicked"
+                                        SemanticProperties.Description="Choose scanning task" />
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+                    <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="6">
+                        <Label x:Name="ResultHeadingLabel" Text="" IsVisible="False"
+                               TextColor="White" FontSize="17" FontAttributes="Bold" />
+                        <Button x:Name="CashierCheckoutButton" Grid.Column="1" Text="Checkout (0)"
+                                IsVisible="False" Clicked="OnCashierCheckoutClicked"
+                                BackgroundColor="#0081FB" TextColor="White" FontSize="12"
+                                FontAttributes="Bold" CornerRadius="9" Padding="10,3"
+                                HeightRequest="36" />
+                        <!-- Pharmacist only: the plus adds THIS scan once; cart opens Checkout. -->
+                        <Grid x:Name="PharmacyAddGrid" Grid.Column="2" WidthRequest="42"
+                              HeightRequest="40" IsVisible="False">
+                            <Border x:Name="PharmacyAddBorder" BackgroundColor="#116EA8"
+                                    Stroke="#66B8EB" StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 11" />
+                            <Path Data="M12,4 L12,20 M4,12 L20,12" Stroke="White"
+                                  StrokeThickness="2.8" StrokeLineCap="Round"
+                                  WidthRequest="23" HeightRequest="23" Aspect="Uniform"
+                                  HorizontalOptions="Center" VerticalOptions="Center"
+                                  InputTransparent="True" />
+                            <Button x:Name="PharmacyAddButton" Text="" BackgroundColor="Transparent"
+                                    Padding="0" Clicked="OnPharmacyAddClicked"
+                                    SemanticProperties.Description="Add this scan to pharmacist cart" />
+                        </Grid>
+                        <Grid x:Name="PharmacyCartGrid" Grid.Column="3" WidthRequest="48"
+                              HeightRequest="40" IsVisible="False">
+                            <Border x:Name="PharmacyCartBorder" BackgroundColor="#24648F"
+                                    Stroke="#66B8EB" StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 11" />
+                            <Path Data="M2,4 L5,4 L8,16 L20,16 L23,7 L6,7 M9,20 L9,20.1 M19,20 L19,20.1"
+                                  Stroke="White" StrokeThickness="2" StrokeLineCap="Round"
+                                  StrokeLineJoin="Round" Fill="Transparent" Aspect="Uniform"
+                                  WidthRequest="26" HeightRequest="26"
+                                  HorizontalOptions="Center" VerticalOptions="Center"
+                                  InputTransparent="True" />
+                            <Label x:Name="PharmacyCartCount" Text="0" TextColor="White"
+                                   BackgroundColor="#007BF0" FontSize="10" FontAttributes="Bold"
+                                   HorizontalOptions="End" VerticalOptions="Start"
+                                   HorizontalTextAlignment="Center" WidthRequest="18"
+                                   HeightRequest="16" InputTransparent="True" />
+                            <Button x:Name="PharmacyCheckoutButton" Text="" BackgroundColor="Transparent"
+                                    Padding="0" Clicked="OnPharmacyCheckoutClicked"
+                                    SemanticProperties.Description="Open pharmacist cart and checkout" />
+                        </Grid>
+                        <Button x:Name="ResetSessionButton" Grid.Column="4" Text="Reset count"
+                                IsVisible="False" Clicked="OnResetSessionClicked"
+                                BackgroundColor="#28445C" TextColor="White" FontSize="11"
+                                CornerRadius="9" Padding="9,3" HeightRequest="34" />
+                        <Label x:Name="ResultStatusLabel" Grid.Column="5" Text="" IsVisible="False"
+                               TextColor="#B9D7EB" FontSize="12" VerticalOptions="Center" />
+                    </Grid>
+                    <ScrollView Grid.Row="2">
+                        <VerticalStackLayout Spacing="11">
+                            <!-- Visible only until the user starts voice or manual scanning. -->
+                            <Label x:Name="ResultReadyPrompt" Text="Voice activated or manual scan"
+                                   TextColor="#A8C7DC" FontSize="15" Margin="0,24,0,0"
+                                   HorizontalTextAlignment="Center" />
+                            <Label x:Name="ResultTotalLabel" IsVisible="False" Text=""
+                                   FontSize="29" FontAttributes="Bold" TextColor="#74DBF7"
+                                   HorizontalTextAlignment="Center" />
+                            <!-- Individual item types and quantities; scrolls above the scan controls. -->
+                            <VerticalStackLayout x:Name="CountedItemsList" IsVisible="False" Spacing="6" />
+                            <Border x:Name="ResultVerdictBorder" IsVisible="False" Stroke="#40677A"
+                                    StrokeThickness="1" StrokeShape="RoundRectangle 13"
+                                    BackgroundColor="#193749" Padding="12">
+                                <Grid ColumnDefinitions="44,*" ColumnSpacing="8">
+                                    <Grid HeightRequest="37" WidthRequest="37" VerticalOptions="Center">
+                                        <Path x:Name="VerdictCheckGlyph" IsVisible="False"
+                                              Data="M4,13 L10,19 L21,5" Stroke="#6BF0B3" StrokeThickness="3.8"
+                                              StrokeLineCap="Round" StrokeLineJoin="Round" Fill="Transparent"
+                                              WidthRequest="33" HeightRequest="33" />
+                                        <Path x:Name="VerdictErrorGlyph" IsVisible="False"
+                                              Data="M6,6 L19,19 M19,6 L6,19" Stroke="#FF7A83" StrokeThickness="3.8"
+                                              StrokeLineCap="Round" Fill="Transparent"
+                                              WidthRequest="33" HeightRequest="33" />
+                                        <Path x:Name="VerdictReviewGlyph" IsVisible="False"
+                                              Data="M12,4 L12,15 M12,19 L12,21" Stroke="#FFD491"
+                                              StrokeThickness="3.8" StrokeLineCap="Round" Fill="Transparent"
+                                              WidthRequest="33" HeightRequest="33" />
+                                    </Grid>
+                                    <Label x:Name="ResultVerdictLabel" Grid.Column="1" Text=""
+                                           FontSize="17" FontAttributes="Bold" TextColor="White"
+                                           VerticalOptions="Center" LineBreakMode="WordWrap"/>
+                                </Grid>
+                            </Border>
+                            <Label x:Name="ResultDetailsLabel" IsVisible="False" Text=""
+                                   TextColor="#D7E7F4" FontSize="14" LineBreakMode="WordWrap" />
+                            <!-- Cashier-only running order. Other roles never see this. -->
+                            <Border x:Name="CashierOrderPanel" IsVisible="False"
+                                    BackgroundColor="#152E46" Stroke="#416583"
+                                    StrokeThickness="1" StrokeShape="RoundRectangle 12"
+                                    Padding="12">
+                                <VerticalStackLayout Spacing="10">
+                                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                        <Label Text="Current order" TextColor="White"
+                                               FontSize="16" FontAttributes="Bold" />
+                                        <Label x:Name="CashierOrderUnits" Grid.Column="1"
+                                               Text="0 items" TextColor="#80D7FF"
+                                               FontSize="13" FontAttributes="Bold" />
+                                    </Grid>
+                                    <VerticalStackLayout x:Name="CashierOrderPreviewList" Spacing="7" />
+                                    <Label Text="Prices can be entered in Checkout."
+                                           FontSize="11" TextColor="#A6C4DC" />
+                                </VerticalStackLayout>
+                            </Border>
+                            <!-- Pharmacist-only cart: one explicit plus tap per fresh scan. -->
+                            <Border x:Name="PharmacyOrderPanel" IsVisible="False"
+                                    BackgroundColor="#152E46" Stroke="#416583"
+                                    StrokeThickness="1" StrokeShape="RoundRectangle 12"
+                                    Padding="12">
+                                <VerticalStackLayout Spacing="9">
+                                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                        <Label Text="Pharmacist cart" TextColor="White"
+                                               FontSize="16" FontAttributes="Bold" />
+                                        <Label x:Name="PharmacyOrderUnits" Grid.Column="1"
+                                               Text="0 items" TextColor="#80D7FF" FontSize="13"
+                                               FontAttributes="Bold" />
+                                    </Grid>
+                                    <VerticalStackLayout x:Name="PharmacyOrderPreviewList" Spacing="7" />
+                                </VerticalStackLayout>
+                            </Border>
+                            <!-- Only visible for a confirmed likely location mismatch. -->
+                            <Grid x:Name="DestinationMapsLink" IsVisible="False" HeightRequest="48"
+                                  HorizontalOptions="Start" ColumnDefinitions="28,*" ColumnSpacing="8">
+                                <Path Data="M12,2 C7.58,2 4,5.58 4,10 C4,15.5 12,22 12,22 C12,22 20,15.5 20,10 C20,5.58 16.42,2 12,2 Z M12,7 A3,3 0 1 0 12,13 A3,3 0 1 0 12,7 Z"
+                                      Fill="#59B8FF" WidthRequest="24" HeightRequest="24"
+                                      HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True" />
+                                <Label Grid.Column="1" Text="Open delivery address in Google Maps"
+                                       TextColor="#83C9FF" FontSize="14" FontAttributes="Bold"
+                                       VerticalOptions="Center" InputTransparent="True" />
+                                <Button x:Name="GoogleMapsButton" Grid.ColumnSpan="2" Text=""
+                                        BackgroundColor="Transparent" Clicked="OnGoogleMapsClicked"
+                                        SemanticProperties.Description="Open package destination in Google Maps" />
+                            </Grid>
+                            <Label x:Name="ResultNoteLabel" Text="" IsVisible="False"
+                                   TextColor="#A8C7D8" FontSize="12" LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
+                    </ScrollView>
+                    <!-- Actions have a dedicated footer row and never obscure the scrolling results. -->
+                    <Grid Grid.Row="3" ColumnDefinitions="*,Auto" ColumnSpacing="12" Padding="0,8,0,0">
+                        <!-- Manual Scan: same API flow as the spoken command. -->
+                        <Grid x:Name="ManualScanFab" Grid.Column="0" WidthRequest="112" HeightRequest="74"
+                              HorizontalOptions="Start" VerticalOptions="End">
+            <Border BackgroundColor="#0081FB" Stroke="#55AEFF" StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 22" />
+            <VerticalStackLayout Spacing="1" HorizontalOptions="Center" VerticalOptions="Center"
+                                 InputTransparent="True">
+                <Grid WidthRequest="30" HeightRequest="28">
+                    <Path Data="M8,3 L4,3 L4,8 M22,3 L26,3 L26,8 M4,20 L4,25 L8,25 M22,25 L26,25 L26,20"
+                          Stroke="White" StrokeThickness="2.3" StrokeLineCap="Round"
+                          Fill="Transparent" WidthRequest="30" HeightRequest="28" />
+                    <Path Data="M10,9 L10,19 M13,9 L13,19 M17,9 L17,19 M20,9 L20,19"
+                          Stroke="White" StrokeThickness="1.7" Fill="Transparent"
+                          WidthRequest="30" HeightRequest="28" />
+                </Grid>
+                <Label x:Name="ManualScanActionLabel" Text="SCAN" TextColor="White" FontSize="11" FontAttributes="Bold"
+                       HorizontalOptions="Center" InputTransparent="True" />
+            </VerticalStackLayout>
+            <Button x:Name="ManualScanButton" Text="" Clicked="OnManualScanClicked"
+                    WidthRequest="112" HeightRequest="74" BackgroundColor="Transparent"
+                    CornerRadius="22" Pressed="OnUiButtonPressed" Released="OnUiButtonReleased"
+                    SemanticProperties.Description="Scan selected workflow" />
+        </Grid>
+        <!-- Voice: still recognizes ONLY the word Scan. -->
+                        <Grid x:Name="VoiceFab" Grid.Column="1" WidthRequest="68" HeightRequest="68"
+                              HorizontalOptions="End" VerticalOptions="End">
+            <Border x:Name="VoiceFabBackground" BackgroundColor="#246BA5"
+                    Stroke="#55AEFF" StrokeThickness="1.5" StrokeShape="RoundRectangle 34" />
+            <Path Data="M12,2 C10.34,2 9,3.34 9,5 L9,12 C9,13.66 10.34,15 12,15 C13.66,15 15,13.66 15,12 L15,5 C15,3.34 13.66,2 12,2 Z M7,11 L7,12 C7,14.76 9.24,17 12,17 C14.76,17 17,14.76 17,12 L17,11 L19,11 L19,12 C19,15.53 16.39,18.43 13,18.92 L13,22 L11,22 L11,18.92 C7.61,18.43 5,15.53 5,12 L5,11 Z"
+                  Fill="White" WidthRequest="29" HeightRequest="29" Aspect="Uniform"
+                  HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True" />
+            <Button x:Name="ListenButton" Text="" Clicked="OnToggleListeningClicked"
+                    WidthRequest="68" HeightRequest="68" BackgroundColor="Transparent"
+                    CornerRadius="34" Pressed="OnUiButtonPressed" Released="OnUiButtonReleased"
+                    SemanticProperties.Description="Start listening for Scan" />
+        </Grid>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Hidden compatibility elements are required by the existing camera/cart
+             partial classes; they are never displayed in this simplified UI. -->
+        <Grid IsVisible="False" InputTransparent="True" HeightRequest="0" WidthRequest="0">
+            <CollectionView x:Name="ItemsList" IsVisible="False" />
+            <Label x:Name="ModeTitle" IsVisible="False" />
+            <Label x:Name="CartCountLabel" IsVisible="False" />
+            <Grid x:Name="CartDragHeader" IsVisible="False" />
+        </Grid>
+
+        <!-- Consistent custom video settings. Hidden native pickers preserve the existing
+             UVC MJPEG mode population, resolution/FPS selection and restart behavior. -->
+        <Grid x:Name="SettingsOverlay" IsVisible="False" InputTransparent="False"
+              BackgroundColor="#D908101A" Padding="22,22">
+            <Border BackgroundColor="#10243B" Stroke="#1688FF" StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 22" Padding="20,22"
+                    HorizontalOptions="Fill" VerticalOptions="Center"
+                    MaximumWidthRequest="440" MaximumHeightRequest="650">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="18">
+                    <Grid ColumnDefinitions="*,42" ColumnSpacing="12">
+                        <VerticalStackLayout Spacing="4" VerticalOptions="Center">
+                            <Label Text="Video Settings" TextColor="White" FontSize="22"
+                                   FontAttributes="Bold" />
+                            <Label Text="USB Camera · MJPEG" TextColor="#84BFEF" FontSize="13" />
+                        </VerticalStackLayout>
+                        <Grid Grid.Column="1" WidthRequest="42" HeightRequest="42">
+                            <Border BackgroundColor="#20384F" Stroke="#426987" StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 21" />
+                            <Path Data="M6,6 L18,18 M18,6 L6,18" Stroke="#E5F2FF" StrokeThickness="2.3"
+                                  StrokeLineCap="Round" WidthRequest="24" HeightRequest="24"
+                                  HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True" />
+                            <Button Text="" BackgroundColor="Transparent" CornerRadius="21"
+                                    Clicked="OnCloseSettingsClicked"
+                                    SemanticProperties.Description="Close video settings" />
+                        </Grid>
+                    </Grid>
+
+                    <VerticalStackLayout Grid.Row="1" Spacing="9">
+                        <Label Text="RESOLUTION" TextColor="#A0C2DD" FontSize="12" FontAttributes="Bold" />
+                        <Border BackgroundColor="#213C55" Stroke="#50799E" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12" Padding="12,5">
+                            <Grid ColumnDefinitions="*,30" HeightRequest="48">
+                                <Label Text="{Binding SelectedItem, Source={x:Reference ResolutionPicker}, TargetNullValue='Select resolution'}"
+                                       TextColor="White" FontSize="16" VerticalOptions="Center" />
+                                <Path Grid.Column="1" Data="M3,7 L12,16 L21,7" Stroke="#E4F4FF"
+                                      StrokeThickness="2.8" WidthRequest="24" HeightRequest="24"
+                                      HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True" />
+                                <Button Text="" Grid.ColumnSpan="2" Clicked="OnVideoResolutionSelectorClicked"
+                                        BackgroundColor="Transparent"
+                                        SemanticProperties.Description="Choose camera resolution" />
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Row="2" Spacing="9">
+                        <Label Text="FRAME RATE" TextColor="#A0C2DD" FontSize="12" FontAttributes="Bold" />
+                        <Border BackgroundColor="#213C55" Stroke="#50799E" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12" Padding="12,5">
+                            <Grid ColumnDefinitions="*,30" HeightRequest="48">
+                                <Label Text="{Binding SelectedItem, Source={x:Reference FrameRatePicker}, TargetNullValue='Select FPS'}"
+                                       TextColor="White" FontSize="16" VerticalOptions="Center" />
+                                <Path Grid.Column="1" Data="M3,7 L12,16 L21,7" Stroke="#E4F4FF"
+                                      StrokeThickness="2.8" WidthRequest="24" HeightRequest="24"
+                                      HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True" />
+                                <Button Text="" Grid.ColumnSpan="2" Clicked="OnVideoFpsSelectorClicked"
+                                        BackgroundColor="Transparent"
+                                        SemanticProperties.Description="Choose camera frame rate" />
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <Border Grid.Row="3" BackgroundColor="#182E46" Stroke="#395775"
+                            StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="12">
+                        <VerticalStackLayout Spacing="6">
+                            <Label x:Name="ModesInfoLabel"
+                                   Text="Connect a USB camera to load its supported MJPEG modes."
+                                   TextColor="#BCD5EA" FontSize="12" LineBreakMode="WordWrap" />
+                            <Label Text="Applying a different resolution or FPS may restart the preview."
+                                   TextColor="#91AEC7" FontSize="11" LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Grid Grid.Row="4" RowDefinitions="Auto,0">
+                        <Button x:Name="ApplyVideoButton" Text="Apply changes" Clicked="OnApplyVideoClicked"
+                                BackgroundColor="#0081FB" TextColor="White" FontAttributes="Bold"
+                                FontSize="16" HeightRequest="52" CornerRadius="14"
+                                Pressed="OnUiButtonPressed" Released="OnUiButtonReleased"
+                                SemanticProperties.Description="Apply video settings" />
+                    </Grid>
+                </Grid>
+            </Border>
+            <!-- Existing camera logic reads these exact picker names and events. -->
+            <Grid IsVisible="False" InputTransparent="True" HeightRequest="0" WidthRequest="0">
+                <Picker x:Name="ResolutionPicker" Title="Resolution" SelectedIndexChanged="OnResolutionChanged" />
+                <Picker x:Name="FrameRatePicker" Title="FPS" />
+            </Grid>
+        </Grid>
+
+        <!-- Same navy/blue choice dialog styling as role and task selectors. -->
+        <Grid x:Name="VideoOptionsOverlay" IsVisible="False" InputTransparent="False"
+              BackgroundColor="#D908101A" Padding="22">
+            <Border BackgroundColor="#10243B" Stroke="#1688FF" StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 22" Padding="20" VerticalOptions="Center"
+                    HorizontalOptions="Fill" MaximumHeightRequest="630" MaximumWidthRequest="440">
+                <Grid RowDefinitions="Auto,*,Auto" RowSpacing="16">
+                    <Label x:Name="VideoOptionsTitle" Text="Choose resolution" TextColor="White"
+                           FontSize="21" FontAttributes="Bold" />
+                    <ScrollView Grid.Row="1">
+                        <VerticalStackLayout x:Name="VideoOptionsPanel" Spacing="8" />
+                    </ScrollView>
+                    <Button Grid.Row="2" Text="Cancel" Clicked="OnVideoOptionsCancelClicked"
+                            BackgroundColor="#28435C" TextColor="White" HeightRequest="48"
+                            CornerRadius="13" FontAttributes="Bold" />
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Full-screen modal spinner blocks controls during scan processing. -->
+        <Grid x:Name="MuseScanLoadingOverlay" IsVisible="False"
+              InputTransparent="False" BackgroundColor="#99000000" Padding="20">
+            <Border BackgroundColor="#E3182B40" Stroke="#5480A3" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16" Padding="25,22"
+                    HorizontalOptions="Center" VerticalOptions="Center">
+                <VerticalStackLayout Spacing="12" HorizontalOptions="Center">
+                    <ActivityIndicator x:Name="MuseScanLoadingSpinner" IsRunning="False"
+                                       Color="#0081FB" WidthRequest="46" HeightRequest="46" />
+                    <Label Text="Meta Muse AI" FontSize="18" FontAttributes="Bold" TextColor="White"
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="Reading image with Muse AI..."
+                           FontSize="14" TextColor="#D7ECFF" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- Custom in-app task info. No Android native DisplayAlert dialogs. -->
+        <Grid x:Name="WorkflowInfoOverlay" IsVisible="False" BackgroundColor="#D908101A"
+              InputTransparent="False" Padding="18,22">
+            <Border BackgroundColor="#0E2037" Stroke="#1688FF" StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 23" Padding="20,20"
+                    HorizontalOptions="Fill" VerticalOptions="Center"
+                    MaximumHeightRequest="620">
+                <Grid RowDefinitions="Auto,*,Auto" RowSpacing="17">
+                    <Grid ColumnDefinitions="46,*,42" ColumnSpacing="10">
+                        <Border BackgroundColor="#163D67" Stroke="#247AD1" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 23" HeightRequest="46" WidthRequest="46">
+                            <Label Text="i" TextColor="#7BC1FF" FontSize="24" FontAttributes="Bold"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                            <Label x:Name="InfoRoleLabel" FontSize="20" FontAttributes="Bold"
+                                   TextColor="White" LineBreakMode="TailTruncation" />
+                            <Label x:Name="InfoTaskLabel" FontSize="13" TextColor="#AFC8E2"
+                                   LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
+                        <Button Grid.Column="2" Text="✕" Clicked="OnWorkflowInfoCloseClicked"
+                                FontSize="17" BackgroundColor="#1B344F" TextColor="#DDEEFF"
+                                CornerRadius="22" WidthRequest="42" HeightRequest="42"
+                                Padding="0" SemanticProperties.Description="Close instructions" />
+                    </Grid>
+                    <ScrollView Grid.Row="1">
+                        <VerticalStackLayout Spacing="12">
+                            <Border BackgroundColor="#142C47" Stroke="#29496C" StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 14" Padding="14">
+                                <VerticalStackLayout Spacing="6">
+                                    <Label Text="WHAT IT DOES" TextColor="#58B7FF" FontSize="12" FontAttributes="Bold" />
+                                    <Label x:Name="InfoWhatLabel" TextColor="#E2F0FF" FontSize="15" />
+                                </VerticalStackLayout>
+                            </Border>
+                            <Border BackgroundColor="#142C47" Stroke="#29496C" StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 14" Padding="14">
+                                <VerticalStackLayout Spacing="6">
+                                    <Label Text="HOW TO USE" TextColor="#58B7FF" FontSize="12" FontAttributes="Bold" />
+                                    <Label x:Name="InfoHowLabel" TextColor="#E2F0FF" FontSize="15" />
+                                </VerticalStackLayout>
+                            </Border>
+                            <Border BackgroundColor="#142C47" Stroke="#29496C" StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 14" Padding="14">
+                                <VerticalStackLayout Spacing="9">
+                                    <Label Text="RESULT STATUS" TextColor="#58B7FF" FontSize="12" FontAttributes="Bold" />
+                                    <Grid ColumnDefinitions="24,*" ColumnSpacing="8">
+                                        <Path Data="M4,13 L10,19 L21,5" Stroke="#43D39C" StrokeThickness="3"
+                                              StrokeLineCap="Round" Fill="Transparent" HeightRequest="24" WidthRequest="24" />
+                                        <Label Grid.Column="1" Text="Likely delivery address match" TextColor="#E3F4EC" FontSize="14" />
+                                    </Grid>
+                                    <Grid ColumnDefinitions="24,*" ColumnSpacing="8">
+                                        <Path Data="M5,5 L19,19 M19,5 L5,19" Stroke="#FF7087" StrokeThickness="3"
+                                              Fill="Transparent" HeightRequest="24" WidthRequest="24" />
+                                        <Label Grid.Column="1" Text="Delivery address mismatch" TextColor="#FFE5E8" FontSize="14" />
+                                    </Grid>
+                                    <Grid ColumnDefinitions="24,*" ColumnSpacing="8">
+                                        <Label Text="!" TextColor="#FFD074" FontSize="20" FontAttributes="Bold"
+                                               WidthRequest="24" HorizontalTextAlignment="Center" />
+                                        <Label Grid.Column="1" Text="Unclear scan / manual verification" TextColor="#FBE6B7" FontSize="14" />
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </Border>
+                            <Label x:Name="InfoCautionLabel" FontSize="12" TextColor="#A8C4DE"
+                                   LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
+                    </ScrollView>
+                    <Button Grid.Row="2" Text="Got it" Clicked="OnWorkflowInfoCloseClicked"
+                            BackgroundColor="#0081FB" TextColor="White" CornerRadius="14"
+                            HeightRequest="52" FontSize="17" FontAttributes="Bold" />
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Task chooser uses the same custom theme as the role chooser. -->
+        <Grid x:Name="TaskChoicesOverlay" IsVisible="False" BackgroundColor="#D908101A"
+              InputTransparent="False" Padding="22">
+            <Border BackgroundColor="#10243B" Stroke="#1688FF" StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 22" Padding="20" VerticalOptions="Center"
+                    HorizontalOptions="Fill" MaximumHeightRequest="650">
+                <Grid RowDefinitions="Auto,*,Auto" RowSpacing="16">
+                    <Label Text="Choose task" TextColor="White" FontSize="21" FontAttributes="Bold" />
+                    <ScrollView Grid.Row="1">
+                        <VerticalStackLayout x:Name="TaskOptionsPanel" Spacing="8" />
+                    </ScrollView>
+                    <Button Grid.Row="2" Text="Cancel" Clicked="OnTaskSelectorCancelClicked"
+                            BackgroundColor="#28435C" TextColor="White" HeightRequest="48"
+                            CornerRadius="13" FontAttributes="Bold" />
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Main scanner reset confirmation; does not change the Checkout reset popup. -->
+        <Grid x:Name="MainOrderResetConfirmationOverlay" IsVisible="False"
+              InputTransparent="False" BackgroundColor="#D908101A" Padding="26">
+            <Border BackgroundColor="#10243B" Stroke="#1688FF" StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 22" Padding="21,25"
+                    HorizontalOptions="Fill" VerticalOptions="Center" MaximumWidthRequest="440">
+                <VerticalStackLayout Spacing="16">
+                    <VerticalStackLayout Spacing="7">
+                        <Label Text="Reset current order?" TextColor="White"
+                               FontSize="21" FontAttributes="Bold" />
+                        <Label Text="Clear all items in this order and start again?"
+                               TextColor="#BCD5EA" FontSize="14" />
+                    </VerticalStackLayout>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,9,0,0">
+                        <Button Text="No, stay" Clicked="OnCancelMainOrderResetClicked"
+                                BackgroundColor="#28435C" TextColor="White" HeightRequest="50"
+                                CornerRadius="13" FontAttributes="Bold" />
+                        <Button Grid.Column="1" Text="Yes, reset" Clicked="OnConfirmMainOrderResetClicked"
+                                BackgroundColor="#0081FB" TextColor="White" HeightRequest="50"
+                                CornerRadius="13" FontAttributes="Bold" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- Custom Android Back confirmation: appears above camera/settings/info overlays. -->
+        <Grid x:Name="ExitConfirmationOverlay" IsVisible="False"
+              InputTransparent="False" BackgroundColor="#D908101A" Padding="26">
+            <Border BackgroundColor="#10243B" Stroke="#1688FF" StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 22" Padding="21,25"
+                    HorizontalOptions="Fill" VerticalOptions="Center"
+                    MaximumWidthRequest="440">
+                <VerticalStackLayout Spacing="16">
+                    <VerticalStackLayout Spacing="7">
+                        <Label Text="Exit Meta Muse AI?" TextColor="White" FontSize="21"
+                               FontAttributes="Bold" />
+                        <Label Text="Are you sure you want to exit the app?"
+                               TextColor="#BCD5EA" FontSize="14" />
+                    </VerticalStackLayout>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,9,0,0">
+                        <Button Text="No, stay" Clicked="OnExitStayClicked"
+                                BackgroundColor="#28435C" TextColor="White"
+                                HeightRequest="50" CornerRadius="13" FontAttributes="Bold" />
+                        <Button Grid.Column="1" Text="Yes, exit" Clicked="OnExitYesClicked"
+                                BackgroundColor="#0081FB" TextColor="White"
+                                HeightRequest="50" CornerRadius="13" FontAttributes="Bold" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>

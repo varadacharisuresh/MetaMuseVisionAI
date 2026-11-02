@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UvcViewer.RoleSelectionPage"
+             BackgroundColor="#080E18" NavigationPage.HasNavigationBar="False">
+  <Grid RowDefinitions="*,Auto" RowSpacing="0">
+    <ScrollView Grid.Row="0">
+      <VerticalStackLayout Padding="26,54,26,24" Spacing="22">
+        <Border BackgroundColor="#123353" Stroke="#2875A8" StrokeThickness="1"
+                StrokeShape="RoundRectangle 22" WidthRequest="82" HeightRequest="82"
+                HorizontalOptions="Center" Padding="16">
+          <Path Data="M4,8 L4,4 L8,4 M16,4 L20,4 L20,8 M20,16 L20,20 L16,20 M8,20 L4,20 L4,16 M8,12 L16,12"
+                Stroke="#80D1FF" StrokeThickness="2.2" StrokeLineCap="Round"
+                Fill="Transparent" Aspect="Uniform" />
+        </Border>
+        <Label Text="META MUSE AI" TextColor="White" FontSize="29"
+               FontAttributes="Bold" HorizontalTextAlignment="Center" />
+        <Label Text="Voice-Powered Visual Intelligence" TextColor="#74CAFF" FontSize="17"
+               FontAttributes="Bold" HorizontalTextAlignment="Center" />
+        <Label Text="Powered by Muse Spark 1.3" TextColor="#92AFCB" FontSize="13"
+               HorizontalTextAlignment="Center" />
+        <Label Text="Choose your role, then use voice or manual scanning."
+               TextColor="#D0E2F4" FontSize="14" HorizontalTextAlignment="Center" />
+        <Border Stroke="#314D68" BackgroundColor="#122338" StrokeShape="RoundRectangle 18"
+                StrokeThickness="1" Padding="18,21" Margin="0,12,0,0">
+          <VerticalStackLayout Spacing="13">
+            <Label Text="ROLE" TextColor="#96B8D7" FontSize="12" FontAttributes="Bold" />
+            <Border BackgroundColor="#213C55" Stroke="#50799E" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12" Padding="13,6">
+              <Grid ColumnDefinitions="*,30" HeightRequest="46">
+                <Label x:Name="RoleSelectionLabel" Text="General" FontSize="18" TextColor="White"
+                       VerticalOptions="Center" />
+                <Path Grid.Column="1" Data="M3,7 L12,16 L21,7" Stroke="#E4F4FF"
+                      StrokeThickness="2.8" WidthRequest="24" HeightRequest="24"
+                      HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True" />
+                <Button Grid.ColumnSpan="2" Clicked="OnRoleSelectorClicked" Text=""
+                        BackgroundColor="Transparent" SemanticProperties.Description="Choose role" />
+              </Grid>
+            </Border>
+          </VerticalStackLayout>
+        </Border>
+      </VerticalStackLayout>
+    </ScrollView>
+
+    <!-- Anchored to screen bottom, regardless of available vertical space. -->
+    <Grid Grid.Row="1" Padding="26,12,26,28" BackgroundColor="#080E18">
+      <Button Text="START SCANNING" Clicked="OnStartClicked" BackgroundColor="#0081FB"
+              TextColor="White" FontSize="17" FontAttributes="Bold" HeightRequest="58"
+              CornerRadius="16" />
+    </Grid>
+
+    <!-- Custom role chooser; no gray Android native radio-selection dialog. -->
+    <Grid x:Name="RoleChoicesOverlay" Grid.RowSpan="2" IsVisible="False"
+          BackgroundColor="#D908101A" InputTransparent="False" Padding="22">
+      <Border BackgroundColor="#10243B" Stroke="#1688FF" StrokeThickness="1.5"
+              StrokeShape="RoundRectangle 22" Padding="20" VerticalOptions="Center"
+              HorizontalOptions="Fill" MaximumHeightRequest="650">
+        <Grid RowDefinitions="Auto,*,Auto" RowSpacing="16">
+          <Label Text="Choose your role" TextColor="White" FontSize="21" FontAttributes="Bold" />
+          <ScrollView Grid.Row="1">
+            <VerticalStackLayout x:Name="RoleOptionsPanel" Spacing="8" />
+          </ScrollView>
+          <Button Grid.Row="2" Text="Cancel" Clicked="OnRoleSelectorCancelClicked"
+                  BackgroundColor="#28435C" TextColor="White" HeightRequest="48"
+                  CornerRadius="13" FontAttributes="Bold" />
+        </Grid>
+      </Border>
+    </Grid>
+
+    <!-- Same navy/blue exit confirmation used on the scanner screen; no exit icon. -->
+    <Grid x:Name="ExitConfirmationOverlay" Grid.RowSpan="2" IsVisible="False"
+          InputTransparent="False" BackgroundColor="#D908101A" Padding="26">
+      <Border BackgroundColor="#10243B" Stroke="#1688FF" StrokeThickness="1.5"
+              StrokeShape="RoundRectangle 22" Padding="21,25"
+              HorizontalOptions="Fill" VerticalOptions="Center"
+              MaximumWidthRequest="440">
+        <VerticalStackLayout Spacing="17">
+          <VerticalStackLayout Spacing="7">
+            <Label Text="Exit Meta Muse AI?" TextColor="White" FontSize="21"
+                   FontAttributes="Bold" />
+            <Label Text="Are you sure you want to exit the app?"
+                   TextColor="#BCD5EA" FontSize="14" />
+          </VerticalStackLayout>
+          <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,9,0,0">
+            <Button Text="No, stay" Clicked="OnExitStayClicked"
+                    BackgroundColor="#28435C" TextColor="White"
+                    HeightRequest="50" CornerRadius="13" FontAttributes="Bold" />
+            <Button Grid.Column="1" Text="Yes, exit" Clicked="OnExitYesClicked"
+                    BackgroundColor="#0081FB" TextColor="White"
+                    HeightRequest="50" CornerRadius="13" FontAttributes="Bold" />
+          </Grid>
+        </VerticalStackLayout>
+      </Border>
+    </Grid>
+  </Grid>
+</ContentPage>

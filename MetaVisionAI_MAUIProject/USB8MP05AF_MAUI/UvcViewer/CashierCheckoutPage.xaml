@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="UvcViewer.CashierCheckoutPage" BackgroundColor="#080E18" NavigationPage.HasNavigationBar="False">
+    <Grid RowDefinitions="Auto,*,Auto" RowSpacing="0">
+        <Border BackgroundColor="#101E30" StrokeThickness="0" Padding="16,18,16,14">
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                <!-- Real vector arrow, not a text character. -->
+                <Grid WidthRequest="48" HeightRequest="48" VerticalOptions="Center">
+                    <Border BackgroundColor="#243E58" StrokeThickness="0" StrokeShape="RoundRectangle 13"/>
+                    <Button Text="" BackgroundColor="Transparent" Padding="0" Clicked="OnBackClicked" SemanticProperties.Description="Back to scanner"/>
+                    <Path Data="M12,19 L5,12 L12,5 M5,12 L19,12" Stroke="White" StrokeThickness="2.2" StrokeLineCap="Round" StrokeLineJoin="Round" Fill="Transparent" Aspect="Uniform" WidthRequest="23" HeightRequest="23" HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True"/>
+                </Grid>
+                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                    <Label x:Name="CheckoutTitleLabel" Text="Cashier Checkout" FontSize="23" FontAttributes="Bold" TextColor="White"/>
+                    <Label x:Name="OrderCountLabel" Text="0 items" FontSize="12" TextColor="#B3D0E7"/>
+                </VerticalStackLayout>
+                <!-- Reset current Cashier or Pharmacist order. -->
+                <Grid Grid.Column="2" WidthRequest="48" HeightRequest="48" VerticalOptions="Center">
+                    <Border BackgroundColor="#243E58" StrokeThickness="0" StrokeShape="RoundRectangle 13"/>
+                    <Path Data="M20,7 L20,12 L15,12 M20,12 A8,8 0 1 0 12,20"
+                          Stroke="#9CD7FF" StrokeThickness="2.2" StrokeLineCap="Round"
+                          StrokeLineJoin="Round" Fill="Transparent" Aspect="Uniform"
+                          WidthRequest="24" HeightRequest="24" HorizontalOptions="Center"
+                          VerticalOptions="Center" InputTransparent="True"/>
+                    <Button x:Name="ResetOrderButton" Text="" BackgroundColor="Transparent"
+                            Padding="0" Clicked="OnResetOrderClicked"
+                            SemanticProperties.Description="Reset current order"/>
+                </Grid>
+            </Grid>
+        </Border>
+        <CollectionView Grid.Row="1" x:Name="CheckoutItems" BackgroundColor="Transparent" SelectionMode="None" Margin="12,12,12,4">
+            <CollectionView.EmptyView>
+                <Label Text="No items in this order yet. Return to the scanner to add items." FontSize="15" TextColor="#B8D0E2" HorizontalTextAlignment="Center" Margin="16,40"/>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="#172E46" Stroke="#385A78" StrokeThickness="1" StrokeShape="RoundRectangle 14" Padding="12" Margin="0,0,0,10">
+                        <VerticalStackLayout Spacing="10">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Spacing="2">
+                                    <Label Text="{Binding Description}" TextColor="White" FontAttributes="Bold" FontSize="16" LineBreakMode="WordWrap"/>
+                                    <Label Text="{Binding SourceType}" TextColor="#A7C7DE" FontSize="11"/>
+                                </VerticalStackLayout>
+                                <!-- Real vector trash icon; same row BindingContext as before. -->
+                                <Grid Grid.Column="1" WidthRequest="44" HeightRequest="44" VerticalOptions="Start">
+                                    <Border BackgroundColor="#51323C" Stroke="#674858" StrokeThickness="1" StrokeShape="RoundRectangle 12"/>
+                                    <Button Text="" BackgroundColor="Transparent" Padding="0" Clicked="OnDeleteClicked" SemanticProperties.Description="Delete item"/>
+                                    <Path Data="M3,6 L21,6 M8,6 L8,4 C8,2.9 8.9,2 10,2 L14,2 C15.1,2 16,2.9 16,4 L16,6 M19,6 L18,20 C17.9,21.1 17,22 16,22 L8,22 C7,22 6.1,21.1 6,20 L5,6 M10,11 L10,17 M14,11 L14,17" Stroke="#FFD0D0" StrokeThickness="1.9" StrokeLineCap="Round" StrokeLineJoin="Round" Fill="Transparent" Aspect="Uniform" WidthRequest="22" HeightRequest="22" HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True"/>
+                                </Grid>
+                            </Grid>
+                            <Grid ColumnDefinitions="Auto,90,*,100" ColumnSpacing="7" RowDefinitions="Auto,Auto">
+                                <Label Text="Qty" TextColor="#B7D0E2" FontSize="12" VerticalOptions="Center"/>
+                                <Entry Grid.Column="1" Text="{Binding Quantity, Mode=OneWay}" SemanticProperties.Description="Edit item quantity" Keyboard="Numeric" TextColor="White" BackgroundColor="#27465E" HorizontalTextAlignment="Center" FontSize="14" HeightRequest="45" TextChanged="OnQuantityChanged" Unfocused="OnQuantityUnfocused"/>
+                                <Label Grid.Column="2" Text="Unit price ($)" TextColor="#B7D0E2" FontSize="12" VerticalOptions="Center"/>
+                                <Entry Grid.Column="3" Text="{Binding UnitPriceText, Mode=OneWay}" SemanticProperties.Description="Edit unit price" Placeholder="Enter" PlaceholderColor="#91AFC6" Keyboard="Numeric" TextColor="White" BackgroundColor="#27465E" HorizontalTextAlignment="Center" FontSize="14" HeightRequest="45" TextChanged="OnPriceChanged"/>
+                                <Label Grid.Row="1" Grid.ColumnSpan="4" Text="{Binding LineTotalText}" TextColor="#77E2C0" FontSize="13" FontAttributes="Bold" HorizontalTextAlignment="End" Margin="0,6,0,0"/>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Border Grid.Row="2" BackgroundColor="#101E30" Stroke="#37526D" StrokeThickness="1" Padding="17,13,17,18">
+            <VerticalStackLayout Spacing="10">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                    <Label Text="Total quantity" TextColor="#BCD3E6" FontSize="13"/>
+                    <Label x:Name="TotalUnitsLabel" Grid.Column="1" Text="0" TextColor="White" FontAttributes="Bold" FontSize="14"/>
+                </Grid>
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                    <Label Text="Order total" TextColor="White" FontAttributes="Bold" FontSize="17"/>
+                    <Label x:Name="TotalPriceLabel" Grid.Column="1" Text="Set prices" TextColor="#7CDEB7" FontAttributes="Bold" FontSize="20"/>
+                </Grid>
+                <Label x:Name="MissingPricesLabel" FontSize="11" TextColor="#B3CDE0" Text="Prices must be provided by the cashier or catalog."/>
+                <Grid HeightRequest="52" HorizontalOptions="Fill">
+                    <Border BackgroundColor="#0081FB" Stroke="#4BA8FF" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 13"/>
+                    <Grid ColumnDefinitions="*,36" ColumnSpacing="4" Padding="14,0">
+                        <Label Text="Checkout" TextColor="White" FontAttributes="Bold"
+                               FontSize="17" VerticalOptions="Center" InputTransparent="True" />
+                        <Path Grid.Column="1" Data="M4,13 L10,19 L21,5" Stroke="White"
+                              StrokeThickness="2.7" StrokeLineCap="Round" StrokeLineJoin="Round"
+                              Fill="Transparent" WidthRequest="27" HeightRequest="27"
+                              HorizontalOptions="Center" VerticalOptions="Center"
+                              InputTransparent="True" />
+                    </Grid>
+                    <Button x:Name="CheckoutButton" Text="" Clicked="OnCheckoutClicked"
+                            BackgroundColor="Transparent" Padding="0"
+                            SemanticProperties.Description="Review checkout order" />
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+        <!-- App-styled confirmation. No real payment processing. -->
+        <Grid x:Name="SummaryOverlay" Grid.RowSpan="3" IsVisible="False" InputTransparent="False" BackgroundColor="#D908101A" Padding="22">
+            <Border BackgroundColor="#10243B" Stroke="#1688FF" StrokeThickness="1.5" StrokeShape="RoundRectangle 21" Padding="20" VerticalOptions="Center" HorizontalOptions="Fill">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="Order summary" FontAttributes="Bold" FontSize="21" TextColor="White"/>
+                    <Label x:Name="SummaryText" TextColor="#C7DEF1" FontSize="15"/>
+                    <Label Text="This screen prepares an order only. No payment is processed." TextColor="#A8C6DE" FontSize="12"/>
+                    <Grid HeightRequest="48" WidthRequest="54" HorizontalOptions="End">
+                        <Border BackgroundColor="#0081FB" StrokeThickness="0"
+                                StrokeShape="RoundRectangle 12"/>
+                        <Path Data="M5,5 L19,19 M19,5 L5,19" Stroke="White" StrokeThickness="2.5"
+                              StrokeLineCap="Round" WidthRequest="22" HeightRequest="22"
+                              HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True" />
+                        <Button Text="" Clicked="OnCloseSummaryClicked" BackgroundColor="Transparent"
+                                Padding="0" SemanticProperties.Description="Close checkout summary" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+        <!-- Same custom navy modal style as the rest of the app. -->
+        <Grid x:Name="ResetOrderConfirmationOverlay" Grid.RowSpan="3" IsVisible="False"
+              InputTransparent="False" BackgroundColor="#D908101A" Padding="22">
+            <Border BackgroundColor="#10243B" Stroke="#1688FF" StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 21" Padding="20"
+                    VerticalOptions="Center" HorizontalOptions="Fill">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="Reset current order?" TextColor="White"
+                           FontSize="21" FontAttributes="Bold"/>
+                    <Label Text="This will remove every item, quantity and price in the current order."
+                           TextColor="#C7DEF1" FontSize="14"/>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,6,0,0">
+                        <Grid HeightRequest="50">
+                            <Border BackgroundColor="#253F57" Stroke="#476784" StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 12"/>
+                            <Label Text="Stay" TextColor="White" HorizontalOptions="Center"
+                                   VerticalOptions="Center" InputTransparent="True"/>
+                            <Button Text="" Clicked="OnCancelResetOrderClicked"
+                                    BackgroundColor="Transparent" Padding="0"
+                                    SemanticProperties.Description="Keep current order"/>
+                        </Grid>
+                        <Grid Grid.Column="1" HeightRequest="50">
+                            <Border BackgroundColor="#087EF2" StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 12"/>
+                            <Label Text="Reset" TextColor="White" FontAttributes="Bold"
+                                   HorizontalOptions="Center" VerticalOptions="Center"
+                                   InputTransparent="True"/>
+                            <Button Text="" Clicked="OnConfirmResetOrderClicked"
+                                    BackgroundColor="Transparent" Padding="0"
+                                    SemanticProperties.Description="Confirm reset current order"/>
+                        </Grid>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+        </Grid>
+</ContentPage>

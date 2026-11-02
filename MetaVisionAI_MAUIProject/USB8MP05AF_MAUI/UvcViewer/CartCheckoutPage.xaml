@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:styles="clr-namespace:UvcViewer.Styles" x:Class="UvcViewer.CartCheckoutPage" BackgroundColor="#080E18" NavigationPage.HasNavigationBar="False"><ContentPage.Resources><ResourceDictionary><ResourceDictionary.MergedDictionaries><styles:UiButtonStyles/></ResourceDictionary.MergedDictionaries></ResourceDictionary></ContentPage.Resources><Grid RowDefinitions="Auto,*,Auto" RowSpacing="0">
+
+    <!-- App bar -->
+    <Grid Grid.Row="0" Padding="16,18,16,13" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14" BackgroundColor="#101E30">
+      <!-- Lucide-style vector back arrow; no font glyphs or emoji. -->
+      <Grid Grid.Column="0" WidthRequest="48" HeightRequest="48" VerticalOptions="Center">
+        <Button Text="" Clicked="OnBackClicked"
+                SemanticProperties.Description="Back to scanner"
+                Style="{StaticResource UiHeaderIconButton}"
+                Pressed="OnUiButtonPressed" Released="OnUiButtonReleased"/>
+        <Path Data="M12,19 L5,12 L12,5 M5,12 L19,12"
+              Stroke="White" StrokeThickness="2.2"
+              StrokeLineCap="Round" StrokeLineJoin="Round" Fill="Transparent"
+              WidthRequest="24" HeightRequest="24" Aspect="Uniform"
+              HorizontalOptions="Center" VerticalOptions="Center"
+              InputTransparent="True"/>
+      </Grid>
+      <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+        <Label Text="Shopping cart" TextColor="White" FontSize="23" FontAttributes="Bold"/>
+        <Label Text="Edit items and quantities" TextColor="#A5BDD4" FontSize="12"/>
+      </VerticalStackLayout>
+      <Border Grid.Column="2" StrokeThickness="0" BackgroundColor="#24425A" StrokeShape="RoundRectangle 16" Padding="13,9" VerticalOptions="Center">
+        <Label x:Name="CartItemCount" Text="0 items" TextColor="#E9F6FF" FontSize="13" FontAttributes="Bold"/>
+      </Border>
+    </Grid>
+
+    <!-- True scrolling region: the checkout footer never moves offscreen. -->
+    <CollectionView x:Name="CheckoutItems" Grid.Row="1" SelectionMode="None" Margin="13,12,13,6" BackgroundColor="Transparent" VerticalScrollBarVisibility="Always">
+      <CollectionView.EmptyView>
+        <Grid Padding="20">
+          <Label Text="No items" FontSize="17" TextColor="#BBD0DF" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </Grid>
+      </CollectionView.EmptyView>
+      <CollectionView.ItemTemplate>
+        <DataTemplate>
+          <Border BackgroundColor="#162A3F" Stroke="#35516A" StrokeThickness="1" StrokeShape="RoundRectangle 14" Padding="13" Margin="0,0,0,11">
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" RowSpacing="10" ColumnSpacing="12">
+              <!-- Barcode text is never used as a product name. -->
+              <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="4">
+                <Label Text="SCANNED IDENTIFIER" TextColor="#87B8DC" FontSize="10" FontAttributes="Bold"/>
+                <Label Text="{Binding Code}" TextColor="White" FontSize="16" FontAttributes="Bold" LineBreakMode="CharacterWrap"/>
+                <Label Text="{Binding ProductName}" TextColor="#BAD3E8" FontSize="12"/>
+                <Label Text="{Binding AssociatedIdLabel}" TextColor="#BAD3E8" FontSize="12"/>
+              </VerticalStackLayout>
+              <!-- Delete uses the same vector trash icon as the scanner. -->
+              <Grid Grid.Row="0" Grid.Column="1" WidthRequest="44" HeightRequest="44" VerticalOptions="Start">
+                <Border BackgroundColor="#493340" StrokeThickness="1" StrokeShape="RoundRectangle 14" Stroke="#674858"/>
+                <Path Data="M3,6 L21,6 M8,6 L8,4 C8,2.9 8.9,2 10,2 L14,2 C15.1,2 16,2.9 16,4 L16,6 M19,6 L18,20 C17.9,21.1 17,22 16,22 L8,22 C7,22 6.1,21.1 6,20 L5,6 M10,11 L10,17 M14,11 L14,17" Stroke="#FFBBBB" StrokeThickness="2" StrokeLineCap="Round" StrokeLineJoin="Round" Fill="Transparent" WidthRequest="23" HeightRequest="23" Aspect="Uniform" HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True"/>
+                <Button Text="" Clicked="OnDeleteClicked" SemanticProperties.Description="Delete cart item" Style="{StaticResource UiTransparentIconButton}" Pressed="OnUiButtonPressed" Released="OnUiButtonReleased" WidthRequest="44" HeightRequest="44"/>
+              </Grid>
+              <BoxView Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="1" Color="#32465B"/>
+              <Grid Grid.Row="2" Grid.ColumnSpan="2" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <VerticalStackLayout Grid.Column="0" Spacing="5" VerticalOptions="Center">
+                  <Label Text="{Binding PriceSourceLabel}" TextColor="#A7BED1" FontSize="11"/>
+                  <Label Text="{Binding UnitPriceLabel}" TextColor="White" FontSize="16" FontAttributes="Bold"/>
+                  <Label Text="{Binding LineTotalLabel, StringFormat='Line total: {0}'}" TextColor="#79DCBB" FontSize="12"/>
+                </VerticalStackLayout>
+                <HorizontalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
+                  <Grid WidthRequest="44" HeightRequest="44" VerticalOptions="Center">
+                    <Button Text="" Clicked="OnDecreaseQuantityClicked"
+                            SemanticProperties.Description="Decrease quantity"
+                            Style="{StaticResource UiQuantityButton}"
+                            Pressed="OnUiButtonPressed" Released="OnUiButtonReleased"/>
+                    <Path Data="M5,12 L19,12" Stroke="White" StrokeThickness="2.2"
+                          StrokeLineCap="Round" Fill="Transparent"
+                          WidthRequest="22" HeightRequest="22" Aspect="Uniform"
+                          HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True"/>
+                  </Grid>
+                  <Entry Text="{Binding Quantity, Mode=OneWay}" Keyboard="Numeric" TextChanged="OnQuantityTextChanged" Unfocused="OnQuantityUnfocused" MaxLength="3" SemanticProperties.Description="Edit quantity" Style="{StaticResource UiQuantityEntry}"/>
+                  <Grid WidthRequest="44" HeightRequest="44" VerticalOptions="Center">
+                    <Button Text="" Clicked="OnIncreaseQuantityClicked"
+                            SemanticProperties.Description="Increase quantity"
+                            Style="{StaticResource UiQuantityButton}"
+                            Pressed="OnUiButtonPressed" Released="OnUiButtonReleased"/>
+                    <Path Data="M12,5 L12,19 M5,12 L19,12" Stroke="White" StrokeThickness="2.2"
+                          StrokeLineCap="Round" Fill="Transparent"
+                          WidthRequest="22" HeightRequest="22" Aspect="Uniform"
+                          HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True"/>
+                  </Grid>
+                </HorizontalStackLayout>
+              </Grid>
+            </Grid>
+          </Border>
+        </DataTemplate>
+      </CollectionView.ItemTemplate>
+    </CollectionView>
+
+    <!-- Always pinned to the bottom, even with 100s of rows. -->
+    <Border Grid.Row="2" BackgroundColor="#101E30" Stroke="#32435D" StrokeThickness="1" Padding="18,14,18,20">
+      <Grid RowDefinitions="Auto,Auto" RowSpacing="12">
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="7">
+          <Label Grid.Row="0" Text="Total quantity" FontSize="13" TextColor="#AFC4D9"/>
+          <Label x:Name="TotalQuantityLabel" Grid.Row="0" Grid.Column="1" Text="0" TextColor="White" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+          <Label Grid.Row="1" Text="Estimated total" FontSize="17" FontAttributes="Bold" TextColor="White"/>
+          <Label x:Name="TotalAmountLabel" Grid.Row="1" Grid.Column="1" Text="$0.00" TextColor="#78DCBC" FontSize="23" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+        </Grid>
+        <Button x:Name="CheckoutButton" Grid.Row="1" Text="Checkout" Clicked="OnCheckoutClicked" Style="{StaticResource UiCheckoutButton}" Pressed="OnUiButtonPressed" Released="OnUiButtonReleased"/>
+      </Grid>
+    </Border>
+  </Grid>
+</ContentPage>
