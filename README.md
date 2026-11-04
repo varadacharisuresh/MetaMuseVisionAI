@@ -9,6 +9,8 @@
 
 **The problem:** Handheld scanners occupy workers' hands, while dedicated wearable scanning equipment can add cost and pairing/charging complexity. My goal is a low-cost, plug-in headset that uses the phone for power and processing.
 
+**Bring your own eyewear:** This is a separate wearable headset, not a replacement pair of smart glasses. Users can keep their own prescription glasses or existing workplace goggles and wear the headset alongside them, where the frames fit comfortably. Compatibility with particular safety goggles, clearance and retention still require testing; the headset itself is not certified eye protection.
+
 ### Quick Judge Tour
 
 | Start here | Link | What to review |
@@ -97,6 +99,7 @@ By integrating Meta Muse Spark, the application can interpret captured images an
 ## Key Features
 
 - **Hands-Free Operation:** Wearable camera positioned for convenient visual capture.
+- **Use Your Own Glasses:** The headset is designed to be worn with existing prescription glasses or workplace goggles, subject to fit. It does not require proprietary optical lenses or replace certified protective eyewear.
 - **Voice-Activated Scanning:** Trigger scanning using the voice command "Scan".
 - **Barcode and QR Code Recognition:** Read barcode information from camera images.
 - **AI-Powered Object Counting:** Identify and count visible items.
@@ -133,6 +136,10 @@ The development process included:
 6. Developing and integrating the Android application with Meta's multimodal AI capabilities.
 
 The headset uses a lightweight frame with a camera angled downward to support hands-free scanning of objects held in front of the wearer.
+
+### Designed Around the Eyewear You Already Use
+
+**No special glasses required:** The camera mounts on a separate 3D-printed wearable frame, so a user can continue wearing their own prescription glasses. The same concept can be worn alongside work goggles when there is sufficient clearance and a secure, comfortable fit. The headset does not provide vision correction or eye protection; it must not displace or interfere with required workplace PPE. Different glasses and safety goggles still need fit and usability validation.
 
 ### Estimated Prototype Hardware Cost
 
