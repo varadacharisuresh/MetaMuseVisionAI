@@ -36,6 +36,17 @@ Explore the **original headset I designed in Blender and 3D-printed**, along wit
 | [<img src="MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic1.png" alt="Headset Blender model view 1" width="260">](MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic1.png) | [<img src="MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic2.png" alt="Headset Blender model view 2" width="260">](MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic2.png) |
 | [<img src="MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic3.png" alt="Headset Blender model view 3" width="260">](MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic3.png) | [<img src="MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic4.png" alt="Headset Blender model view 4" width="260">](MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic4.png) |
 
+
+### 3D-Printed Prototype — Original Photos
+
+These photographs show the **physical headset prototype I designed in Blender, 3D-printed, and assembled**, including the printed frame, USB autofocus camera mount, and cable routing. They are photographs of the actual prototype, not 3D renders or AI-generated images.
+
+| Camera mount — side view | Camera module — front view |
+| :---: | :---: |
+| [<img src="MetaVisionAI_MAUIProject/3DPrintedPrototype/3d-printed-headset-camera-side.jpg" alt="Close-up side view of the 3D-printed headset with its USB camera" width="220">](MetaVisionAI_MAUIProject/3DPrintedPrototype/3d-printed-headset-camera-side.jpg) | [<img src="MetaVisionAI_MAUIProject/3DPrintedPrototype/3d-printed-headset-camera-front.jpg" alt="Front view of the camera module mounted on the printed headset" width="220">](MetaVisionAI_MAUIProject/3DPrintedPrototype/3d-printed-headset-camera-front.jpg) |
+| **3D-printed frame and folding arms** | **Top view and cable routing** |
+| [<img src="MetaVisionAI_MAUIProject/3DPrintedPrototype/3d-printed-headset-frame.jpg" alt="3D-printed headset frame, side arms and cable" width="220">](MetaVisionAI_MAUIProject/3DPrintedPrototype/3d-printed-headset-frame.jpg) | [<img src="MetaVisionAI_MAUIProject/3DPrintedPrototype/3d-printed-headset-top-view.jpg" alt="Top view of the 3D-printed headset and mounted camera" width="220">](MetaVisionAI_MAUIProject/3DPrintedPrototype/3d-printed-headset-top-view.jpg) |
+
 ### Android App — Screenshots
 
 | Preview 1 | Preview 2 | Preview 3 |
