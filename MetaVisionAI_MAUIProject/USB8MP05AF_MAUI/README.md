@@ -1,6 +1,6 @@
 # USB8MP05AF — Clean open-source UVC preview (Android, .NET 10 MAUI)
 
-> **Historical UVC-only prototype notes:** This file documents an earlier camera-preview milestone, not the current completed Meta Muse Vision AI app. The current project includes Meta Muse Spark visual analysis, barcode workflows, and role-specific Android functionality. For the current project description, screenshots, 3D design files, APK link, and setup guidance, see the **[main project README](../../../README.md)**. The older instructions below are preserved as engineering history.
+> **Historical UVC-only prototype notes:** This file documents an earlier camera-preview milestone, not the current completed Meta Muse Vision AI app. The current project includes Meta Muse Spark visual analysis, barcode workflows, and role-specific Android functionality. For the current project description, screenshots, 3D design files, APK link, and setup guidance, see the **[main project README](../../README.md)**. The older instructions below are preserved as engineering history.
 
 This is a **fresh, single-project** replacement for the old `DroidUvcBridge` solution. It has *no VisioForge, no paid SDK, no Java source binding project, no generated `Com.Usb8mp05af` C# classes*, and no compiled output from the previous project.
 
