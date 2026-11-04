@@ -133,6 +133,14 @@ The USB UVC headset hardware is designed around standard camera connectivity and
 
 Cross-platform application deployment and device compatibility require additional development and testing.
 
+## Why We Chose .NET MAUI — Cross-Platform Vision
+
+I chose **C# and .NET MAUI** to build Meta Muse Vision AI with a **shared application codebase** that can be extended to **Android, iOS, Windows, and macOS (through Mac Catalyst)**. This lets us reuse much of the user interface, role-based workflows, and Meta Muse Spark integration rather than developing four separate applications.
+
+The same **USB UVC headset concept** could be paired with compatible phones, tablets, and computers, making the hardware potentially reusable across platforms instead of being tied to one device.
+
+**Current implementation:** The working prototype targets **Android**, using Android USB Host and JNI for the UVC camera. Supporting **iOS, Windows, or macOS** will require platform-specific camera integration, permissions, hardware compatibility checks, and testing; cross-platform support is a **development goal**, not a feature already delivered.
+
 ## Project Status
 
 Meta Muse Vision AI is a functional research prototype developed for the **Meta AI Global Developer Hackathon 2026**.
