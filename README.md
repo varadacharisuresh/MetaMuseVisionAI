@@ -10,6 +10,7 @@
 - **[Read the project report](Meta%20Muse%20Vision%20AI%20Document.pdf)**
 - **[Explore the Blender headset design](MetaVisionAI_MAUIProject/3DMetaVisionAIHeadsetModel.blend)** · **[3D-printable STL](MetaVisionAI_MAUIProject/3DMetaVisionAIPrintFile.stl)**
 - **[Browse the Android MAUI source](MetaVisionAI_MAUIProject/USB8MP05AF_MAUI/UvcViewer)**
+- **[Explore optional LED lighting and GM77 scanner concept](docs/hardware/optional-led-and-gm77.md)** — proposed hardware only, not installed
 
 ## Project Overview
 
@@ -123,6 +124,22 @@ The headset uses a lightweight frame with a camera angled downward to support ha
 | **Total** | **Approximately $45–$50** |
 
 *These figures are prototype component estimates, excluding the smartphone, development labor, testing, and commercial manufacturing costs.*
+
+
+## Future Hardware Options — LED Light and GM77 Scanner
+
+> **Planned enhancements only.** The currently demonstrated headset uses the existing 8MP autofocus USB UVC camera. The LED module and GM77 have **not** been integrated into the released hardware, Android app, or hackathon demo.
+
+![Illustration of modular headset expansion: current UVC camera, optional LED and optional GM77](docs/hardware/images/headset-modular-expansion-concept.svg)
+
+| Optional GM77 USB/UART barcode scanner | Optional diffused LED for the existing UVC camera |
+| :---: | :---: |
+| ![GM77 barcode module concept](docs/hardware/images/gm77-barcode-scanner-concept.svg) | ![Auxiliary LED light concept](docs/hardware/images/auxiliary-led-concept.svg) |
+| 640 × 480 CMOS, 5V, ~180mA operating current. Supports 1D/2D barcode decoding over short distances. | Proposed separate illumination to improve capture in low light; it requires a safe driver, power budget and glare testing. |
+
+The **GM77 already includes its own white illumination LED and red aiming LED**. A separate flashlight would serve the existing 8MP camera's broader vision tasks. The GM77's typical specified EAN-13 range is about **50–220mm**, so it is **not** a 3-foot barcode-scanning replacement. USB hub support, power draw, Android HID/serial integration and changes to the 3D-printed mount remain to be tested. None of these additions are included in the current ~$45–$50 base prototype estimate.
+
+**[Read the hardware design, module specifications, interface options, reference links and test plan](docs/hardware/optional-led-and-gm77.md).** The images above are original *concept illustrations*, not photographs of installed parts. For photographs and exact details of the GM77 module, see the [manufacturer's product page](https://en.hzgrow.com/product/186.html).
 
 ## Why Meta Muse Spark AI?
 

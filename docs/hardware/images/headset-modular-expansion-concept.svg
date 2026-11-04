@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="670" viewBox="0 0 1200 670" role="img" aria-labelledby="t d">
+<title id="t">Meta Muse Vision AI - optional headset hardware concept</title>
+<desc id="d">Illustrative architecture showing original USB UVC camera, separate diffused LED and optional GM77 barcode module, connected through a USB hub to Android phone.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#081322"/><stop offset="1" stop-color="#182a40"/></linearGradient>
+ <linearGradient id="frame" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#cbd5e1"/><stop offset="1" stop-color="#64748b"/></linearGradient>
+ <filter id="shadow"><feDropShadow dx="0" dy="7" stdDeviation="10" flood-opacity=".23"/></filter>
+</defs>
+<rect width="1200" height="670" rx="22" fill="url(#bg)"/>
+<text x="52" y="59" fill="#fff" font-size="31" font-weight="700" font-family="Arial,sans-serif">Modular hardware upgrade - concept</text>
+<text x="52" y="90" fill="#9fb4ca" font-size="17" font-family="Arial,sans-serif">Actual prototype: UVC camera + 3D-printed frame. LED and GM77 are optional proposed additions.</text>
+<rect x="52" y="122" width="1096" height="362" rx="17" fill="#102236" stroke="#344d69"/>
+<!-- temple and frame assembly -->
+<path d="M182 319 L320 254 L825 254 L998 294" fill="none" stroke="#475569" stroke-width="23" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M179 309 L318 240 L834 240 L997 279" fill="none" stroke="url(#frame)" stroke-width="19" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M320 246 L355 326 L800 326 L830 250" fill="none" stroke="#94a3b8" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="425" y="300" width="360" height="62" rx="13" fill="#556578" stroke="#b4c1cf" stroke-width="3" filter="url(#shadow)"/>
+<!-- LED -->
+<rect x="478" y="314" width="67" height="37" rx="10" fill="#1e293b" stroke="#f5c451" stroke-width="3"/>
+<circle cx="512" cy="332" r="13" fill="#fff4c8" stroke="#ffd85c" stroke-width="5"/>
+<path d="M490 364 L455 416 L543 416 Z" fill="#ffd85c" opacity=".16"/>
+<!-- UVC camera -->
+<rect x="569" y="310" width="74" height="48" rx="9" fill="#172334" stroke="#89bcff" stroke-width="3"/>
+<circle cx="606" cy="334" r="19" fill="#030b19" stroke="#729bd9" stroke-width="5"/>
+<circle cx="606" cy="334" r="7" fill="#1c496e"/>
+<!-- GM77 -->
+<rect x="672" y="305" width="76" height="55" rx="7" fill="#1b3440" stroke="#63d9c1" stroke-width="3"/>
+<rect x="681" y="314" width="57" height="36" rx="5" fill="#07131c" stroke="#446d72"/>
+<circle cx="700" cy="332" r="12" fill="#152633" stroke="#95afb5" stroke-width="3"/>
+<rect x="722" y="324" width="9" height="15" rx="3" fill="#e3fcf5"/>
+<!-- callouts -->
+<path d="M512 303 L512 187 L336 187" fill="none" stroke="#f5c451" stroke-width="3"/>
+<rect x="181" y="163" width="192" height="48" rx="10" fill="#493d26" stroke="#f5c451"/>
+<text x="198" y="184" fill="#fde68a" font-size="17" font-family="Arial,sans-serif" font-weight="700">Diffused LED</text>
+<text x="198" y="200" fill="#fff1b0" font-size="12" font-family="Arial,sans-serif">OPTIONAL / planned</text>
+<path d="M606 300 L606 184" fill="none" stroke="#89bcff" stroke-width="3"/>
+<rect x="520" y="145" width="172" height="52" rx="10" fill="#213d5c" stroke="#89bcff"/>
+<text x="538" y="166" fill="#dbeafe" font-size="17" font-family="Arial,sans-serif" font-weight="700">8MP USB UVC</text>
+<text x="538" y="185" fill="#b5d4fa" font-size="12" font-family="Arial,sans-serif">CURRENT / existing</text>
+<path d="M708 304 L708 192 L861 192" fill="none" stroke="#63d9c1" stroke-width="3"/>
+<rect x="821" y="163" width="243" height="53" rx="10" fill="#143e3b" stroke="#63d9c1"/>
+<text x="841" y="184" fill="#a7f3d0" font-size="17" font-family="Arial,sans-serif" font-weight="700">GM77 barcode engine</text>
+<text x="841" y="201" fill="#d1fae5" font-size="12" font-family="Arial,sans-serif">OPTIONAL / planned</text>
+<text x="219" y="459" fill="#9fb4ca" font-size="14" font-family="Arial,sans-serif">Stylized headset illustration - placement and dimensions not finalized</text>
+<!-- data route -->
+<path d="M606 362 V521 H392" fill="none" stroke="#89bcff" stroke-width="4" stroke-dasharray="8 6"/>
+<path d="M708 362 V504 H525" fill="none" stroke="#63d9c1" stroke-width="4" stroke-dasharray="8 6"/>
+<rect x="314" y="514" width="217" height="73" rx="12" fill="#172a44" stroke="#96b5da"/>
+<text x="347" y="543" fill="#fff" font-size="19" font-family="Arial,sans-serif" font-weight="700">USB host hub*</text>
+<text x="336" y="568" fill="#b9c9de" font-size="14" font-family="Arial,sans-serif">Dual-device expansion</text>
+<path d="M531 551 H745" fill="none" stroke="#e3eefb" stroke-width="4"/>
+<polygon points="746,551 730,542 730,560" fill="#e3eefb"/>
+<rect x="749" y="502" width="228" height="98" rx="13" fill="#0c192a" stroke="#96b5da" stroke-width="2"/>
+<rect x="834" y="511" width="54" height="76" rx="9" fill="#223a53" stroke="#b3c7e0"/>
+<text x="770" y="622" fill="#e2edf8" font-size="15" font-family="Arial,sans-serif">Android / .NET MAUI</text>
+<text x="50" y="648" fill="#8ba2b9" font-size="14" font-family="Arial,sans-serif">*Hub, USB device handling and combined 5V power must be validated. No integration or performance claims yet.</text>
+</svg>

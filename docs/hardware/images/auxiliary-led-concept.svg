@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="610" viewBox="0 0 1160 610" role="img" aria-labelledby="t d">
+<title id="t">Proposed diffused LED illumination for Meta Muse Vision AI camera</title>
+<desc id="d">Concept diagram of an optional controllable white LED with diffuser aimed towards an object, separate from the already illuminated GM77 scanner.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0a1929"/><stop offset="1" stop-color="#162f45"/></linearGradient><linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffe4a6" stop-opacity=".6"/><stop offset="1" stop-color="#ffe4a6" stop-opacity=".03"/></linearGradient></defs>
+<rect width="1160" height="610" rx="18" fill="url(#bg)"/>
+<text x="40" y="58" font-family="Arial,sans-serif" font-size="31" font-weight="700" fill="#f7fbff">Optional low-light LED for UVC camera</text>
+<text x="41" y="90" font-family="Arial,sans-serif" font-size="16" fill="#acc2d7">Separate from the GM77's own built-in white LED and red aiming light</text>
+<rect x="40" y="119" width="718" height="429" rx="16" fill="#102337" stroke="#3b556a"/>
+<rect x="126" y="155" width="536" height="72" rx="17" fill="#64748b" stroke="#b7c1ce" stroke-width="4"/>
+<rect x="194" y="186" width="103" height="58" rx="13" fill="#202b38" stroke="#fcd875" stroke-width="3"/>
+<circle cx="245" cy="217" r="26" fill="#fff7d8" stroke="#f5cc59" stroke-width="7"/>
+<rect x="418" y="182" width="108" height="62" rx="14" fill="#1e293b" stroke="#8bbff7" stroke-width="3"/>
+<circle cx="471" cy="213" r="26" fill="#020817" stroke="#94a3b8" stroke-width="7"/>
+<circle cx="471" cy="213" r="8" fill="#326487"/>
+<path d="M226 244 L108 479 H480 L272 244" fill="url(#beam)"/>
+<path d="M471 244 L392 465 H565 L495 244" fill="#72c6ff" opacity=".07"/>
+<rect x="196" y="469" width="457" height="40" rx="8" fill="#f1f5f9"/>
+<g stroke="#111827" fill="none"><path stroke-width="6" d="M221 481 V500 M236 481 V500 M250 481 V500 M262 481 V500 M283 481 V500 M291 481 V500 M310 481 V500 M322 481 V500 M342 481 V500 M359 481 V500 M367 481 V500 M385 481 V500 M409 481 V500 M423 481 V500 M438 481 V500 M453 481 V500 M470 481 V500 M491 481 V500 M511 481 V500 M524 481 V500 M543 481 V500 M558 481 V500 M578 481 V500 M597 481 V500 M614 481 V500 M632 481 V500"/></g>
+<text x="178" y="276" font-family="Arial,sans-serif" font-size="16" fill="#ffe59d" font-weight="700">Diffuse white LED</text>
+<text x="452" y="277" font-family="Arial,sans-serif" font-size="16" fill="#9cdbfa" font-weight="700">8MP UVC lens</text>
+<rect x="781" y="119" width="339" height="429" rx="16" fill="#13283c" stroke="#3b556a"/>
+<text x="804" y="166" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#f8fafc">Integration checklist</text>
+<g font-family="Arial,sans-serif" font-size="17" fill="#e0eff9">
+<circle cx="814" cy="218" r="7" fill="#78d6bd"/><text x="832" y="223">Controllable ON / OFF</text>
+<circle cx="814" cy="270" r="7" fill="#78d6bd"/><text x="832" y="276">Current-limited driver</text>
+<circle cx="814" cy="322" r="7" fill="#78d6bd"/><text x="832" y="328">Diffuser / anti-glare</text>
+<circle cx="814" cy="374" r="7" fill="#78d6bd"/><text x="832" y="380">Heat and power testing</text>
+<circle cx="814" cy="426" r="7" fill="#78d6bd"/><text x="832" y="432">Do not point at eyes</text>
+</g>
+<rect x="801" y="469" width="298" height="49" rx="8" fill="#403822" stroke="#d7ae5c"/>
+<text x="815" y="489" fill="#ffe8aa" font-size="15" font-family="Arial,sans-serif" font-weight="700">Planning illustration only</text>
+<text x="815" y="505" fill="#fbe5ac" font-size="12" font-family="Arial,sans-serif">No flashlight module selected or tested</text>
+<text x="40" y="581" font-family="Arial,sans-serif" font-size="14" fill="#8ca8bf">A light can improve exposure; it cannot guarantee autofocus lock or compensate for poor optics.</text>
+</svg>
