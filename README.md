@@ -7,7 +7,7 @@
 
 **In one sentence:** Meta Muse Vision AI combines my own **Blender-designed, 3D-printed headset**, a **USB-powered 8MP autofocus camera**, a **C#/.NET MAUI 10 Android app**, and **Meta Muse Spark 1.3** to explore hands-free barcode scanning and visual assistance.
 
-**The problem:** Handheld scanners occupy workers' hands, while dedicated wearable scanning equipment can add cost and pairing/charging complexity. My goal is a low-cost, plug-in headset that uses the phone for power and processing.
+**The problem:** Even in the AI era, many workplaces still rely on handheld or dedicated wearable scanners designed mainly to read barcodes. Workers also need to count items, read labels and expiry dates, check shipment details, and interpret other visual information—often using separate tools or manual steps. Traditional scanning hardware may occupy workers' hands and add cost, charging, or pairing complexity. **My goal** is an affordable, plug-in headset powered by a phone that supports hands-free barcode scanning **and broader AI-assisted visual tasks**.
 
 **Bring your own eyewear:** This is a separate wearable headset, not a replacement pair of smart glasses. Users can keep their own prescription glasses or existing workplace goggles and wear the headset alongside them, where the frames fit comfortably. Compatibility with particular safety goggles, clearance and retention still require testing; the headset itself is not certified eye protection.
 
@@ -82,11 +82,11 @@ The files above are from this project's own repository. The **current applicatio
 
 ## Problem Statement
 
-Despite advances in artificial intelligence, many industries still depend on traditional handheld barcode scanners and specialized scanning equipment.
+**Even in an AI-powered world, workplace scanning often stops at the barcode.** Many industries still rely on handheld barcode readers and specialized scanning equipment designed primarily to decode barcodes, rather than help workers understand the wider visual information in front of them.
 
-These devices can involve additional hardware costs, charging requirements, Bluetooth or Wi-Fi pairing, and limited functionality beyond barcode reading.
+Everyday tasks—such as **counting products, reading labels and expiry dates, checking shipment addresses, or interpreting visible currency**—often require separate equipment, additional software, or manual effort. This functional gap limits what a conventional scanner can do for workers.
 
-Workers also frequently need to use their hands to operate scanning equipment, reducing convenience during repetitive activities.
+Traditional handheld devices can also occupy a worker's hands, while dedicated wearable scanners may add hardware costs, charging, Bluetooth/Wi-Fi pairing, or maintenance. **The opportunity is to go beyond barcode decoding:** provide a low-cost, plug-and-use, hands-free camera headset that uses a smartphone and AI to assist with multiple visual tasks, not just scanning.
 
 ## Our Solution
 
