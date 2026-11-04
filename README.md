@@ -3,6 +3,14 @@
 
 **Meta AI Global Developer Hackathon 2026**
 
+## Quick Links for Judges
+
+- **[Watch the project demonstration](https://youtu.be/AcdOGsPkFgk)**
+- **[Download Android prototype APK (v1.0.0)](https://github.com/varadacharisuresh/MetaMuseVisionAI/releases/download/v1.0.0/MetaMuseVisionAI_Android.apk)** — testing pre-release; installation and operation are not independently certified
+- **[Read the project report](Meta%20Muse%20Vision%20AI%20Document.pdf)**
+- **[Explore the Blender headset design](MetaVisionAI_MAUIProject/3DMetaVisionAIHeadsetModel.blend)** · **[3D-printable STL](MetaVisionAI_MAUIProject/3DMetaVisionAIPrintFile.stl)**
+- **[Browse the Android MAUI source](MetaVisionAI_MAUIProject/USB8MP05AF_MAUI/UvcViewer)**
+
 ## Project Overview
 
 **Meta Muse Vision AI** is an affordable, hands-free wearable AI vision system that combines a custom-designed, 3D-printed headset, an 8MP autofocus USB camera, and an Android application developed using C# and .NET MAUI 10.
@@ -140,6 +148,58 @@ I chose **C# and .NET MAUI** to build Meta Muse Vision AI with a **shared applic
 The same **USB UVC headset concept** could be paired with compatible phones, tablets, and computers, making the hardware potentially reusable across platforms instead of being tied to one device.
 
 **Current implementation:** The working prototype targets **Android**, using Android USB Host and JNI for the UVC camera. Supporting **iOS, Windows, or macOS** will require platform-specific camera integration, permissions, hardware compatibility checks, and testing; cross-platform support is a **development goal**, not a feature already delivered.
+
+## How the System Works
+
+1. The custom **Blender-designed, 3D-printed headset** positions an autofocus USB UVC camera for hands-free capture.
+2. A compatible Android phone powers the camera via USB-C and shows the live preview through Android USB Host and JNI integration.
+3. The user selects a role and task, then initiates capture using the **"Scan"** voice command or a manual control.
+4. The application sends a captured image to **Meta Muse Spark 1.3** for task-specific visual interpretation and structured responses.
+5. The Android app presents the result and, where applicable, adds items to the cashier or pharmacy workflow.
+
+This is an **image-capture-and-analysis prototype**, not a claim of continuous real-time video inference. AI outputs require human verification, especially for prices, currency, addresses, or pharmacy-related information.
+
+## Developer Setup & Requirements
+
+**Hardware:** Compatible Android phone with USB Host/OTG support (64-bit ARM recommended), USB8MP05AF UVC camera, and suitable USB-C/OTG cable or adapter. The camera draws power from the phone; compatibility and power delivery vary by device.
+
+**Software:** Visual Studio with the .NET 10 MAUI Android workload, Android SDK/build tools, and internet access for NuGet/Maven dependencies. Current source targets `net10.0-android`; **iOS, Windows, and macOS builds are future work**.
+
+**Source location:** `MetaVisionAI_MAUIProject/USB8MP05AF_MAUI/UvcViewer.sln`
+
+1. Clone/download this repository and open the solution in Visual Studio.
+2. Restore the NuGet and Android/Maven dependencies.
+3. Select the **Android** target, build the project, and deploy to a compatible Android device.
+4. Approve microphone/camera and USB-device access when prompted, connect the headset, and test the supported workflows.
+
+For a local **debug test APK**, from the `UvcViewer` project directory:
+
+```cmd
+dotnet build UvcViewer.csproj -f net10.0-android -c Debug -t:SignAndroidPackage -p:AndroidPackageFormats=apk -p:EmbedAssembliesIntoApk=true -p:AndroidKeyStore=false
+```
+
+This uses Android debug signing for testing. **It is not a production release-signing process.** See the [published APK pre-release](https://github.com/varadacharisuresh/MetaMuseVisionAI/releases/tag/v1.0.0) for the uploaded test build.
+
+### Meta AI Configuration & Security
+
+The committed `MuseDemoConfiguration.cs` intentionally has an **empty API key**. It demonstrates where the development configuration is referenced; the AI requests **will not work from a fresh checkout without valid credentials and access**.
+
+- **Never commit, publish, or share real API keys**, and never distribute an APK with a private key embedded in it.
+- For a production or publicly distributed version, route authenticated Meta API calls through a **secure backend**, not a credential embedded in the mobile application.
+- This public repository does not include credentials, a hosted backend, or evidence that every device can install and execute the APK.
+
+### Prototype Limitations
+
+- The project targets **Android** today. Cross-platform .NET MAUI support requires platform-specific USB camera integration and validation.
+- Recognition accuracy depends on camera focus, lighting, distance, image quality, network availability, and AI output consistency.
+- Price values may be **demonstration values** unless extracted from an image; they are not authoritative retail prices.
+- This research prototype is **not certified** for safety-critical, financial, or clinical decisions.
+- The native USB camera libraries are packaged for **ARM64 Android**; other architectures are not assured.
+- The public download is a **pre-release**. Build success or hosting on GitHub does not by itself verify installation on every Android device.
+
+## Third-Party Components & Licensing
+
+This repository incorporates third-party Android UVC and .NET dependencies. Each third-party component retains its own licensing and attribution requirements. No project-wide license has been specified in this repository; its public availability should not be treated as a blanket permission to redistribute all source, designs, or binaries.
 
 ## Project Status
 
