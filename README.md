@@ -5,7 +5,7 @@
 
 ## For Hackathon Judges — Project at a Glance
 
-**In one sentence:** Meta Muse Vision AI combines my own **Blender-designed, 3D-printed headset**, a **USB-powered 8MP autofocus camera**, a **C#/.NET MAUI 10 Android app**, and **Meta Muse Spark AI** to explore hands-free barcode scanning and visual assistance.
+**In one sentence:** Meta Muse Vision AI combines my own **Blender-designed, 3D-printed headset**, a **USB-powered 8MP autofocus camera**, a **C#/.NET MAUI 10 Android app**, and **Meta Muse Spark 1.3** to explore hands-free barcode scanning and visual assistance.
 
 **The problem:** Handheld scanners occupy workers' hands, while dedicated wearable scanning equipment can add cost and pairing/charging complexity. My goal is a low-cost, plug-in headset that uses the phone for power and processing.
 
@@ -28,7 +28,7 @@
 | :---: | :---: |
 | [<img src="MetaVisionAI_MAUIProject/3DPrintedPrototype/3d-printed-headset-camera-front.jpg" alt="Original 3D-printed headset with mounted USB camera" width="250">](MetaVisionAI_MAUIProject/3DPrintedPrototype/3d-printed-headset-camera-front.jpg) | [<img src="MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic1.jpg" alt="Meta Muse Vision AI Android app screen" width="170">](MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic1.jpg) |
 
-**What's already built:** Physical 3D-printed frame, mounted USB UVC camera, Android prototype and Meta Muse Spark integration. The base hardware estimate is about **$45–$50** (excluding the phone, labor and manufacturing).
+**What's already built:** Physical 3D-printed frame, mounted USB UVC camera and Android prototype. The app is configured to call **Meta Muse Spark 1.3** using captured camera frames. The base hardware estimate is about **$45–$50** (excluding the phone, labor and manufacturing).
 
 **What remains future work:** Extended reliability testing, production refinement, cross-platform support, and the [optional LED + GM77 scanner concept](docs/hardware/optional-led-and-gm77.md). Those accessories are **not part of the demonstrated build**.
 
@@ -112,7 +112,7 @@ By integrating Meta Muse Spark, the application can interpret captured images an
 
 ## Technology Stack
 
-- **Multimodal AI:** Meta Muse Spark 1.3
+- **Multimodal AI:** Meta Muse Spark 1.3 (`muse-spark-1.3`), as configured in [the Android source](MetaVisionAI_MAUIProject/USB8MP05AF_MAUI/UvcViewer/MainPage.VoiceBarcode.cs)
 - **Application Development:** C# / .NET MAUI 10
 - **Current Application Platform:** Android
 - **Camera:** USB8MP05AF 8MP Autofocus UVC Camera
@@ -167,6 +167,19 @@ The headset uses a lightweight frame with a camera angled downward to support ha
 The **GM77 already includes its own white illumination LED and red aiming LED**. A separate flashlight would serve the existing 8MP camera's broader vision tasks. The GM77's typical specified EAN-13 range is about **50–220mm**, so it is **not** a 3-foot barcode-scanning replacement. USB hub support, power draw, Android HID/serial integration and changes to the 3D-printed mount remain to be tested. None of these additions are included in the current ~$45–$50 base prototype estimate.
 
 **[Read the hardware design, module specifications, interface options, reference links and test plan](docs/hardware/optional-led-and-gm77.md).** The images above are original *concept illustrations*, not photographs of installed parts. For photographs and exact details of the GM77 module, see the [manufacturer's product page](https://en.hzgrow.com/product/186.html).
+
+## AI Model Used in the Current Prototype
+
+**Current model: Meta Muse Spark 1.3** (request model ID: `muse-spark-1.3`).
+
+The .NET MAUI Android app captures a still image from the existing USB UVC camera and sends it to Meta's chat-completions endpoint for task-specific visual interpretation. The configured request lives in [`MainPage.VoiceBarcode.cs`](MetaVisionAI_MAUIProject/USB8MP05AF_MAUI/UvcViewer/MainPage.VoiceBarcode.cs); both the manual scan action and spoken **"Scan"** command use this scanning workflow.
+
+| AI technology | Status in this repository | Purpose |
+| --- | --- | --- |
+| **Meta Muse Spark 1.3** | **Configured in the current Android source** | Image interpretation for barcode/label reading, object-counting and other task-dependent workflows |
+| **Meta SAM / Segment Anything** | **Not integrated** | A possible future addition for object segmentation, counting or tracking; no SAM requests, model weights or tracking pipeline are included |
+
+**Important:** An API request implementation is present, but the checked-in [`MuseDemoConfiguration.cs`](MetaVisionAI_MAUIProject/USB8MP05AF_MAUI/UvcViewer/MuseDemoConfiguration.cs) deliberately contains **no API key**. A fresh checkout needs valid credentials and API access to execute AI requests. The public repository is not evidence of unattended live API availability, and SAM is **not** part of the current hackathon demo.
 
 ## Why Meta Muse Spark AI?
 
