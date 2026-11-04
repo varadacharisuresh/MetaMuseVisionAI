@@ -1,9 +1,15 @@
 # Meta Muse Vision AI
 ### Voice-Powered Wearable Visual Intelligence
 
-**Meta AI Global Developer Hackathon 2026**
+**Built Solo for the [Meta Global AI Developer Hackathon 2026](https://dev.meta.ai/events/global-hackathon)**
+
+**Competition Track:** Indie Developer  |  **Project Theme:** Push the Frontier
+
+*One independent builder: original Blender-designed and 3D-printed headset, Android software, USB camera integration and Meta Muse Spark 1.3.*
 
 ## For Hackathon Judges — Project at a Glance
+
+**Solo-built Indie Developer entry — Push the Frontier theme.** I independently designed the headset in Blender, 3D-printed and assembled the prototype, developed the Android app, and integrated the USB UVC camera with Meta Muse Spark 1.3. This is an individual project, not a team build.
 
 **In one sentence:** Meta Muse Vision AI combines my own **Blender-designed, 3D-printed headset**, a **USB-powered 8MP autofocus camera**, a **C#/.NET MAUI 10 Android app**, and **Meta Muse Spark 1.3** to explore hands-free barcode scanning and visual assistance.
 
