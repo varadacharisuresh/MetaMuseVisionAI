@@ -29,6 +29,7 @@
 | **4. 3D design** | [Blender model](MetaVisionAI_MAUIProject/3DMetaVisionAIHeadsetModel.blend) · [Printable STL](MetaVisionAI_MAUIProject/3DMetaVisionAIPrintFile.stl) | Original editable and printable headset design |
 | **5. Documentation** | [Project report (PDF)](Meta%20Muse%20Vision%20AI%20Document.pdf) · [How it works](#how-the-system-works) | Features, architecture and use cases |
 | **6. Try the build** | [Android prototype APK (v1.0.0)](https://github.com/varadacharisuresh/MetaMuseVisionAI/releases/download/v1.0.0/MetaMuseVisionAI_Android.apk) · [Requirements](#developer-setup--requirements) | Testing pre-release; compatible Android phone and UVC hardware needed |
+| **7. Contact the developer** | [sukuva.usa@gmail.com](mailto:sukuva.usa@gmail.com) | Questions, feedback, or collaboration inquiries (email only) |
 
 ### Real Hardware and App — Quick Preview
 
@@ -345,6 +346,12 @@ https://github.com/varadacharisuresh/MetaMuseVisionAI
 **Suresh Kumar Varadachari**
 
 https://www.linkedin.com/in/suresh-kumar-varadachari-0a9b9129/
+
+### Contact – Email
+
+For project questions, feedback, or collaboration inquiries, contact me at **[sukuva.usa@gmail.com](mailto:sukuva.usa@gmail.com)**.
+
+*Email is the preferred contact method. No phone number is provided.*
 
 ---
 
