@@ -4,45 +4,152 @@
 **Meta AI Global Developer Hackathon 2026**
 
 ## Project Overview
-Meta Muse Vision AI is a low-cost, wearable AI vision system combining a 3D-printed headset, USB camera, and Android application developed using .NET MAUI.
 
-The system enables hands-free visual data capture using voice commands and integrates Meta Muse AI for intelligent image interpretation.
+**Meta Muse Vision AI** is an affordable, hands-free wearable AI vision system that combines a custom-designed, 3D-printed headset, an 8MP autofocus USB camera, and an Android application developed using C# and .NET MAUI 10.
+
+I personally designed and modeled the wearable headset in **Blender**, 3D-printed the physical prototype, assembled the hardware, developed the Android application, and integrated **Meta's Muse Spark multimodal AI**.
+
+The system enables users to capture and interpret real-world visual information through voice commands, extending beyond conventional barcode scanning into AI-assisted workplace tasks.
+
+## Problem Statement
+
+Despite advances in artificial intelligence, many industries still depend on traditional handheld barcode scanners and specialized scanning equipment.
+
+These devices can involve additional hardware costs, charging requirements, Bluetooth or Wi-Fi pairing, and limited functionality beyond barcode reading.
+
+Workers also frequently need to use their hands to operate scanning equipment, reducing convenience during repetitive activities.
+
+## Our Solution
+
+Meta Muse Vision AI introduces an affordable, USB-connected wearable headset that transforms a standard camera into a hands-free AI-powered visual assistant.
+
+The camera connects directly to an Android smartphone through USB-C, using the phone for power and processing.
+
+By integrating Meta Muse Spark, the application can interpret captured images and return structured information for different workplace tasks.
 
 ## Key Features
-- Hands-free USB camera integration
-- Voice-activated scanning using the command "Scan"
-- Barcode and QR code recognition
-- AI-powered object identification and counting
-- Product and label information extraction
-- Role-based workflows for cashiers, delivery workers, warehouse personnel, and other users
-- Shopping cart and checkout functionality
+
+- **Hands-Free Operation:** Wearable camera positioned for convenient visual capture.
+- **Voice-Activated Scanning:** Trigger scanning using the voice command "Scan".
+- **Barcode and QR Code Recognition:** Read barcode information from camera images.
+- **AI-Powered Object Counting:** Identify and count visible items.
+- **Product and Label Reading:** Extract useful information from product labels and packaging.
+- **Currency Counting:** Interpret visible currency denominations and calculate totals.
+- **Delivery Assistance:** Extract shipment addresses and support location-based verification.
+- **Role-Based Workflows:** Dedicated application workflows for cashiers, delivery workers, packers, pharmacists, receptionists, and general users.
+- **Cart and Checkout:** Manage scanned items, edit quantities and prices, and calculate totals.
+- **USB Plug-and-Play Design:** No separate camera battery, Bluetooth pairing, or camera Wi-Fi connection required.
 
 ## Technology Stack
-- **Mobile Application:** C# / .NET MAUI 10
-- **Platform:** Android
-- **AI Integration:** Meta Muse AI
-- **Barcode Recognition:** Google ML Kit
-- **Camera:** USB UVC autofocus camera
-- **Hardware Design:** Blender 3D modeling and 3D printing
+
+- **Multimodal AI:** Meta Muse Spark 1.3
+- **Application Development:** C# / .NET MAUI 10
+- **Current Application Platform:** Android
+- **Camera:** USB8MP05AF 8MP Autofocus UVC Camera
+- **Camera Integration:** Android USB Host, UVC, and native JNI interoperability
+- **3D Modeling:** Blender
+- **Hardware Prototyping:** 3D Printing
 - **Connectivity:** USB-C
+- **User Interaction:** Voice Commands and Touch Controls
 
-## Hardware
-The prototype uses a lightweight, 3D-printed wearable frame with a USB camera connected directly to a smartphone.
+## Hardware Design and 3D Printing
 
-No separate camera battery, Bluetooth pairing, or Wi-Fi connection is required.
+A major part of this project is the **original wearable headset designed and built from scratch**.
 
-## Applications
-- Retail and cashier operations
-- Warehouse inventory management
-- Package handling and delivery verification
-- Pharmaceutical inventory assistance
-- Industrial and manufacturing workflows
+The development process included:
 
-## Project Status
-Working research prototype developed for the Meta AI Global Developer Hackathon 2026. Individual features and device compatibility require validation before production deployment.
+1. Designing the wearable headset and its components in Blender.
+2. Modeling the camera mounting structure, front frame, foldable side supports, and cable routing.
+3. Creating 3D-printable components and producing the physical prototype.
+4. Mounting the USB autofocus camera onto the printed headset.
+5. Connecting the headset directly to an Android smartphone through USB-C.
+6. Developing and integrating the Android application with Meta's multimodal AI capabilities.
+
+The headset uses a lightweight frame with a camera angled downward to support hands-free scanning of objects held in front of the wearer.
+
+### Estimated Prototype Hardware Cost
+
+| Component | Estimated Cost |
+|---|---:|
+| Custom 3D-printed headset | $10 |
+| USB autofocus camera | $30 |
+| USB cable and connectors | $5 |
+| **Total** | **Approximately $45–$50** |
+
+*These figures are prototype component estimates, excluding the smartphone, development labor, testing, and commercial manufacturing costs.*
+
+## Why Meta Muse Spark AI?
+
+Traditional barcode scanners primarily decode machine-readable codes. Meta's multimodal AI enables broader interpretation of real-world visual information.
+
+Muse Spark is integrated into the Android application to analyze captured images and support tasks such as object counting, label interpretation, currency recognition, and extraction of shipment information.
+
+By combining visual understanding with voice commands, the same wearable device can support multiple workflows without requiring specialized scanning hardware for each task.
+
+**Meta's multimodal AI is the intelligence that extends our wearable camera beyond conventional barcode scanning.**
+
+## Real-World Applications
+
+- **Retail and Cashiers:** Scan products, count items, and manage checkout workflows.
+- **Warehousing:** Support hands-free inventory and package counting.
+- **Delivery and Logistics:** Read shipment information and assist with delivery address verification.
+- **Pharmacies:** Assist with counting items and reading product information.
+- **Reception and Administrative Work:** Read and organize visual information.
+- **Manufacturing:** Support visual inspection and item counting.
+- **General Use:** Identify and count everyday objects through voice commands.
 
 ## Platform Compatibility
-The current application targets Android using .NET MAUI. The UVC headset hardware may also be used with other compatible mobile devices and computers through appropriate software.
+
+The current Meta Muse Vision AI application is developed for **Android using .NET MAUI 10**.
+
+The USB UVC headset hardware is designed around standard camera connectivity and may also be usable with compatible Windows, macOS, and other USB-C devices through appropriate software.
+
+Cross-platform application deployment and device compatibility require additional development and testing.
+
+## Project Status
+
+Meta Muse Vision AI is a functional research prototype developed for the **Meta AI Global Developer Hackathon 2026**.
+
+The project demonstrates an end-to-end approach to wearable AI development, combining original industrial design, 3D printing, electronics integration, mobile application development, and multimodal AI.
+
+Scanning accuracy, device compatibility, and individual AI-assisted workflows require further validation before commercial use.
+
+## Future Enhancements
+
+- Improve camera focus and recognition reliability.
+- Optimize image processing and AI response times.
+- Expand support for compatible mobile and desktop platforms.
+- Refine the headset design for comfort, durability, and manufacturability.
+- Expand industrial workflow integration.
 
 ## Project Goal
-Make hands-free visual intelligence more accessible, affordable, and practical for everyday work.
+
+**Make hands-free visual intelligence affordable, accessible, and practical for everyday work by combining original 3D-printed wearable hardware with Meta's multimodal AI.**
+
+---
+
+## Project Links & Developer Profile
+
+### YouTube – Project Demonstration
+
+Watch the Meta Muse Vision AI prototype and demonstration.
+
+https://youtu.be/AcdOGsPkFgk
+
+### GitHub – Source Code
+
+Explore the .NET MAUI Android application, UVC camera integration, and project source code.
+
+https://github.com/varadacharisuresh/MetaMuseVisionAI
+
+### LinkedIn – Developer Profile
+
+**Suresh Kumar Varadachari**
+
+https://www.linkedin.com/in/suresh-kumar-varadachari-0a9b9129/
+
+---
+
+**Developed for Meta AI Global Developer Hackathon 2026**
+
+*Original headset design | Blender 3D Modeling | 3D Printing | USB Camera Integration | .NET MAUI Android Development | Meta Muse Spark AI*
