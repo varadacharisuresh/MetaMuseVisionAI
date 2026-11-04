@@ -3,14 +3,34 @@
 
 **Meta AI Global Developer Hackathon 2026**
 
-## Quick Links for Judges
+## For Hackathon Judges — Project at a Glance
 
-- **[Watch the project demonstration](https://youtu.be/AcdOGsPkFgk)**
-- **[Download Android prototype APK (v1.0.0)](https://github.com/varadacharisuresh/MetaMuseVisionAI/releases/download/v1.0.0/MetaMuseVisionAI_Android.apk)** — testing pre-release; installation and operation are not independently certified
-- **[Read the project report](Meta%20Muse%20Vision%20AI%20Document.pdf)**
-- **[Explore the Blender headset design](MetaVisionAI_MAUIProject/3DMetaVisionAIHeadsetModel.blend)** · **[3D-printable STL](MetaVisionAI_MAUIProject/3DMetaVisionAIPrintFile.stl)**
-- **[Browse the Android MAUI source](MetaVisionAI_MAUIProject/USB8MP05AF_MAUI/UvcViewer)**
-- **[Explore optional LED lighting and GM77 scanner concept](docs/hardware/optional-led-and-gm77.md)** — proposed hardware only, not installed
+**In one sentence:** Meta Muse Vision AI combines my own **Blender-designed, 3D-printed headset**, a **USB-powered 8MP autofocus camera**, a **C#/.NET MAUI 10 Android app**, and **Meta Muse Spark AI** to explore hands-free barcode scanning and visual assistance.
+
+**The problem:** Handheld scanners occupy workers' hands, while dedicated wearable scanning equipment can add cost and pairing/charging complexity. My goal is a low-cost, plug-in headset that uses the phone for power and processing.
+
+### Quick Judge Tour
+
+| Start here | Link | What to review |
+| --- | --- | --- |
+| **1. Demo video** | **[Watch the project demo](https://youtu.be/AcdOGsPkFgk)** | Physical headset and Android demonstration |
+| **2. Real prototype** | [Original 3D-printed photos](MetaVisionAI_MAUIProject/3DPrintedPrototype) | Actual camera mount, printed frame and cable routing |
+| **3. Android app** | [Application screenshots](#android-app--screenshots) · [MAUI source code](MetaVisionAI_MAUIProject/USB8MP05AF_MAUI/UvcViewer) | User interface and USB camera integration |
+| **4. 3D design** | [Blender model](MetaVisionAI_MAUIProject/3DMetaVisionAIHeadsetModel.blend) · [Printable STL](MetaVisionAI_MAUIProject/3DMetaVisionAIPrintFile.stl) | Original editable and printable headset design |
+| **5. Documentation** | [Project report (PDF)](Meta%20Muse%20Vision%20AI%20Document.pdf) · [How it works](#how-the-system-works) | Features, architecture and use cases |
+| **6. Try the build** | [Android prototype APK (v1.0.0)](https://github.com/varadacharisuresh/MetaMuseVisionAI/releases/download/v1.0.0/MetaMuseVisionAI_Android.apk) · [Requirements](#developer-setup--requirements) | Testing pre-release; compatible Android phone and UVC hardware needed |
+
+### Real Hardware and App — Quick Preview
+
+| My 3D-printed headset (original photo) | Android application |
+| :---: | :---: |
+| [<img src="MetaVisionAI_MAUIProject/3DPrintedPrototype/3d-printed-headset-camera-front.jpg" alt="Original 3D-printed headset with mounted USB camera" width="250">](MetaVisionAI_MAUIProject/3DPrintedPrototype/3d-printed-headset-camera-front.jpg) | [<img src="MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic1.jpg" alt="Meta Muse Vision AI Android app screen" width="170">](MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic1.jpg) |
+
+**What's already built:** Physical 3D-printed frame, mounted USB UVC camera, Android prototype and Meta Muse Spark integration. The base hardware estimate is about **$45–$50** (excluding the phone, labor and manufacturing).
+
+**What remains future work:** Extended reliability testing, production refinement, cross-platform support, and the [optional LED + GM77 scanner concept](docs/hardware/optional-led-and-gm77.md). Those accessories are **not part of the demonstrated build**.
+
+**Important for reviewers:** Current app targets Android. The downloadable APK is a test pre-release and is not certified; working Meta API credentials are intentionally excluded from the public repository.
 
 ## Project Overview
 
