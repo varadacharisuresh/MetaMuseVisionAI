@@ -146,6 +146,15 @@ This opportunity has reinforced my belief that innovation does not always requir
 
 ---
 
+## Android APK — Download (v1.0.0)
+
+The Android prototype APK is available as a **GitHub pre-release** for testing on compatible Android devices. It has not been validated for production use.
+
+- **[Download Android APK](https://github.com/varadacharisuresh/MetaMuseVisionAI/releases/download/v1.0.0/MetaMuseVisionAI_Android.apk)**
+- [View release notes](https://github.com/varadacharisuresh/MetaMuseVisionAI/releases/tag/v1.0.0)
+
+The current application targets Android; a compatible USB UVC camera and Android USB Host support are required for headset functionality. Installation and device compatibility should be verified before broader distribution.
+
 ## Project Links & Developer Profile
 
 ### YouTube – Project Demonstration
