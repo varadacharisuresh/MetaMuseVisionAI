@@ -11,6 +11,33 @@ I personally designed and modeled the wearable headset in **Blender**, 3D-printe
 
 The system enables users to capture and interpret real-world visual information through voice commands, extending beyond conventional barcode scanning into AI-assisted workplace tasks.
 
+## Project Gallery & 3D Design Files
+
+Explore the **original headset I designed in Blender and 3D-printed**, along with screenshots of the .NET MAUI Android application. Click any image to see it at full size.
+
+### Download the 3D Models
+
+- **[Blender 3D Headset Design (.blend)](MetaVisionAI_MAUIProject/3DMetaVisionAIHeadsetModel.blend)** — original editable model for Blender.
+- **[3D Printing File (.stl)](MetaVisionAI_MAUIProject/3DMetaVisionAIPrintFile.stl)** — printable headset geometry; GitHub can preview the model.
+- **[Project Report (PDF)](Meta%20Muse%20Vision%20AI%20Document.pdf)** — detailed project documentation.
+
+### Headset Design — Blender Images
+
+| Preview 1 | Preview 2 |
+| :---: | :---: |
+| [<img src="MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic1.png" alt="Headset Blender model view 1" width="260">](MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic1.png) | [<img src="MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic2.png" alt="Headset Blender model view 2" width="260">](MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic2.png) |
+| [<img src="MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic3.png" alt="Headset Blender model view 3" width="260">](MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic3.png) | [<img src="MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic4.png" alt="Headset Blender model view 4" width="260">](MetaVisionAI_MAUIProject/MetaHeadset_BlenderPic4.png) |
+
+### Android App — Screenshots
+
+| Preview 1 | Preview 2 | Preview 3 |
+| :---: | :---: | :---: |
+| [<img src="MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic1.jpg" alt="Meta Muse Vision AI Android screenshot 1" width="200">](MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic1.jpg) | [<img src="MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic2.jpg" alt="Meta Muse Vision AI Android screenshot 2" width="200">](MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic2.jpg) | [<img src="MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic3.jpg" alt="Meta Muse Vision AI Android screenshot 3" width="200">](MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic3.jpg) |
+| [<img src="MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic4.jpg" alt="Meta Muse Vision AI Android screenshot 4" width="200">](MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic4.jpg) | [<img src="MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic5.jpg" alt="Meta Muse Vision AI Android screenshot 5" width="200">](MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic5.jpg) | [<img src="MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic6.jpg" alt="Meta Muse Vision AI Android screenshot 6" width="200">](MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic6.jpg) |
+| [<img src="MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic7.jpg" alt="Meta Muse Vision AI Android screenshot 7" width="200">](MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic7.jpg) | [<img src="MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic8.jpg" alt="Meta Muse Vision AI Android screenshot 8" width="200">](MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic8.jpg) | [<img src="MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic9.jpg" alt="Meta Muse Vision AI Android screenshot 9" width="200">](MetaVisionAI_MAUIProject/MetaVisionAI_App_Pic9.jpg) |
+
+The files above are from this project's own repository. The **current application is Android-only**; the Blender and STL files document the physical headset design.
+
 ## Problem Statement
 
 Despite advances in artificial intelligence, many industries still depend on traditional handheld barcode scanners and specialized scanning equipment.
