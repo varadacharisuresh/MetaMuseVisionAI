@@ -7,9 +7,11 @@
 
 *One independent builder: original Blender-designed and 3D-printed headset, Android software, USB camera integration and Meta Muse Spark 1.3.*
 
+**Built entirely during the hackathon:** I started Meta Muse Vision AI from scratch within the hackathon period. No headset design, 3D-printed prototype, Android app, or project integration had been built beforehand.
+
 ## For Hackathon Judges — Project at a Glance
 
-**Solo-built Indie Developer entry — Push the Frontier theme.** I independently designed the headset in Blender, 3D-printed and assembled the prototype, developed the Android app, and integrated the USB UVC camera with Meta Muse Spark 1.3. This is an individual project, not a team build.
+**Solo-built Indie Developer entry — Push the Frontier theme.** I started the entire project during the hackathon, with no pre-built headset design, 3D-printed prototype, or Android application. During the competition period, I independently designed the headset in Blender, 3D-printed and assembled it, developed the Android app, and integrated the USB UVC camera with Meta Muse Spark 1.3. This is an individual project, not a team build.
 
 **In one sentence:** Meta Muse Vision AI combines my own **Blender-designed, 3D-printed headset**, a **USB-powered 8MP autofocus camera**, a **C#/.NET MAUI 10 Android app**, and **Meta Muse Spark 1.3** to explore hands-free barcode scanning and visual assistance.
 
@@ -44,7 +46,7 @@
 
 **Meta Muse Vision AI** is an affordable, hands-free wearable AI vision system that combines a custom-designed, 3D-printed headset, an 8MP autofocus USB camera, and an Android application developed using C# and .NET MAUI 10.
 
-I personally designed and modeled the wearable headset in **Blender**, 3D-printed the physical prototype, assembled the hardware, developed the Android application, and integrated **Meta's Muse Spark multimodal AI**.
+**Everything began during the hackathon.** I personally designed and modeled the wearable headset in **Blender**, 3D-printed the physical prototype, assembled the hardware, developed the Android application, and integrated **Meta's Muse Spark multimodal AI**. No part of this project was completed before the hackathon period.
 
 The system enables users to capture and interpret real-world visual information through voice commands, extending beyond conventional barcode scanning into AI-assisted workplace tasks.
 
@@ -277,7 +279,7 @@ This repository incorporates third-party Android UVC and .NET dependencies. Each
 
 ## Project Status
 
-Meta Muse Vision AI is a functional research prototype developed for the **Meta AI Global Developer Hackathon 2026**.
+Meta Muse Vision AI is a functional research prototype **started and built entirely during the Meta Global AI Developer Hackathon 2026**, as a solo **Indie Developer** submission under the **Push the Frontier** theme. The design, physical headset, Android app, and integration work all began within the hackathon period; none was pre-built.
 
 The project demonstrates an end-to-end approach to wearable AI development, combining original industrial design, 3D printing, electronics integration, mobile application development, and multimodal AI.
 
