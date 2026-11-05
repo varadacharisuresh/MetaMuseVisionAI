@@ -13,7 +13,9 @@
 
 **Solo-built Indie Developer entry — Push the Frontier theme.** I started the entire project during the hackathon, with no pre-built headset design, 3D-printed prototype, or Android application. During the competition period, I independently designed the headset in Blender, 3D-printed and assembled it, developed the Android app, and integrated the USB UVC camera with Meta Muse Spark 1.3. This is an individual project, not a team build.
 
-**In one sentence:** Meta Muse Vision AI combines my own **Blender-designed, 3D-printed headset**, a **USB-powered 8MP autofocus camera**, a **C#/.NET MAUI 10 Android app**, and **Meta Muse Spark 1.3** to explore hands-free barcode scanning and visual assistance.
+**In one sentence:** Meta Muse Vision AI combines my own **Blender-designed, 3D-printed headset**, a **USB-powered 8MP autofocus camera**, a **C#/.NET MAUI 10 Android app**, and **Meta Muse Spark 1.3** to explore hands-free **single-barcode or multi-barcode scanning in one capture**, plus broader visual assistance.
+
+**Single or multiple barcodes per scan:** The same Scan action can process **one visible barcode or multiple visible barcodes at once** from a single camera frame. The app collects the readable barcode-associated values into the scan result and, in the cashier workflow, adds them to the scanned-items list. Results depend on visibility, focus, image quality, and legibility; this is not a claim of guaranteed decoding of every symbol.
 
 **The problem:** Even in the AI era, many workplaces still rely on handheld or dedicated wearable scanners designed mainly to read barcodes. Workers also need to count items, read labels and expiry dates, check shipment details, and interpret other visual information—often using separate tools or manual steps. Traditional scanning hardware may occupy workers' hands and add cost, charging, or pairing complexity. **My goal** is an affordable, plug-in headset powered by a phone that supports hands-free barcode scanning **and broader AI-assisted visual tasks**.
 
@@ -110,7 +112,7 @@ By integrating Meta Muse Spark, the application can interpret captured images an
 - **Hands-Free Operation:** Wearable camera positioned for convenient visual capture.
 - **Use Your Own Glasses:** The headset is designed to be worn with existing prescription glasses or workplace goggles, subject to fit. It does not require proprietary optical lenses or replace certified protective eyewear.
 - **Voice-Activated Scanning:** Trigger scanning using the voice command "Scan".
-- **Barcode and QR Code Recognition:** Read barcode information from camera images.
+- **Single- or Multi-Barcode Scanning (One Capture):** Use the same voice or manual Scan action for **one barcode or several barcodes visible simultaneously**. The app processes readable barcode-associated values together and can add multiple results to the cashier's scanned-items list; no separate scan per visible barcode is required.
 - **AI-Powered Object Counting:** Identify and count visible items.
 - **Product and Label Reading:** Extract useful information from product labels and packaging.
 - **Currency Counting:** Interpret visible currency denominations and calculate totals.
@@ -231,8 +233,8 @@ The same **USB UVC headset concept** could be paired with compatible phones, tab
 1. The custom **Blender-designed, 3D-printed headset** positions an autofocus USB UVC camera for hands-free capture.
 2. A compatible Android phone powers the camera via USB-C and shows the live preview through Android USB Host and JNI integration.
 3. The user selects a role and task, then initiates capture using the **"Scan"** voice command or a manual control.
-4. The application sends a captured image to **Meta Muse Spark 1.3** for task-specific visual interpretation and structured responses.
-5. The Android app presents the result and, where applicable, adds items to the cashier or pharmacy workflow.
+4. The application sends a captured image to **Meta Muse Spark 1.3** for task-specific visual interpretation and structured responses. For the barcode task, the same capture may contain **a single barcode or multiple barcodes at once**.
+5. The Android app presents the readable results together and, where applicable, adds scanned items to the cashier or pharmacy workflow.
 
 This is an **image-capture-and-analysis prototype**, not a claim of continuous real-time video inference. AI outputs require human verification, especially for prices, currency, addresses, or pharmacy-related information.
 
